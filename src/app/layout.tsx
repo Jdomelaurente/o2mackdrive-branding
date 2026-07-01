@@ -28,10 +28,7 @@ export const metadata: Metadata = {
   description: site.description,
   keywords: ["O2MackDrive", "car trading Philippines", "used cars Philippines", "buy sell trade cars"],
   icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/logo.png", sizes: "any" },
-    ],
+    icon: "/favicon.svg",
     shortcut: "/favicon.svg",
     apple: "/logo.png",
   },

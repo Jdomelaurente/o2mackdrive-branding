@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -50,19 +49,11 @@ export function Navbar() {
           className="flex items-center gap-2 transition hover:opacity-80"
           aria-label="O2MackDrive home"
         >
-          <Image
+          <img
             src="/logo.png"
             alt="O2MackDrive"
-            width={36}
-            height={36}
-            className="h-8 w-8 object-contain sm:h-9 sm:w-9"
+            className="h-8 w-auto md:h-10"
           />
-          <span
-            className="text-lg font-black tracking-tight sm:text-xl"
-            style={{ color: isScrolledStyle ? "#000000" : "#ffffff" }}
-          >
-            O2MackDrive
-          </span>
         </Link>
 
         {/* Center navigation */}
