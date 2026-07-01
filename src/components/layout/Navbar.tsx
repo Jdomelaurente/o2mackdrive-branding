@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -43,16 +44,15 @@ export function Navbar() {
       }`}
     >
       <Container className="flex min-h-16 items-center justify-between px-6 py-4 md:min-h-20 md:py-5">
-        {/* Brand name */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 transition hover:opacity-80"
-          aria-label="O2MackDrive home"
-        >
-          <img
-            src="/logo.png"
+        {/* Brand logo */}
+        <Link href="/" aria-label="O2MackDrive home">
+          <Image
+            src="/logo-new.png"
             alt="O2MackDrive"
+            width={140}
+            height={40}
             className="h-8 w-auto md:h-10"
+            priority
           />
         </Link>
 
