@@ -5,8 +5,8 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { cars } from "@/data/cars";
 
 export const metadata: Metadata = {
-  title: "Cars for Sale",
-  description: "Browse available cars for sale from O2MackDrive Car Trading.",
+  title: "Car Inventory",
+  description: "Browse quality used cars for sale in Metro Manila — SUVs, sedans, pickups, and more. Straight deals, easy trade-ins from O2MackDrive Car Trading.",
 };
 
 type CarsPageProps = {
@@ -18,13 +18,17 @@ export default async function CarsPage({ searchParams }: CarsPageProps) {
   const initialSearch = Array.isArray(params.search) ? params.search[0] : params.search ?? "";
 
   return (
-    <section className="garage-surface border-b border-white/10 py-10 sm:py-20">
+    <section className="bg-white -mt-20 pt-28 pb-20 text-black min-h-screen md:-mt-28 md:pt-36 sm:pb-42">
       <Container>
-        <div className="grid gap-5 lg:grid-cols-[0.85fr_1fr] lg:items-end">
-          <SectionHeader eyebrow="Current lot inventory" title="Cars for Sale" description="Search the available units, check status, and move straight into viewing or inquiry when a car fits." />
-          <p className="max-w-xl text-sm leading-7 text-slate-400 lg:justify-self-end">
-            Use the filter desk to find a practical match by brand, price, fuel, or status. Every card leads directly to details or inquiry.
-          </p>
+        <div className="border-b border-slate-200 pb-8">
+          <h1 className="text-4xl font-black tracking-tight text-slate-950 sm:text-5xl uppercase">
+            The Collection.
+          </h1>
+          <div className="mt-4 border-l-2 border-slate-900 pl-4">
+            <p className="text-sm text-slate-600 max-w-xl leading-relaxed">
+              Investment-grade instruments of technical art. Each vehicle is verified through our 150-point architectural audit.
+            </p>
+          </div>
         </div>
         <div className="mt-8 sm:mt-10">
           <CarFilters cars={cars} initialSearch={initialSearch} />

@@ -1,9 +1,8 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
 import { Container } from "@/components/ui/Container";
 import { cars } from "@/data/cars";
-import { formatMileage, formatPrice } from "@/lib/format";
+import { formatPrice } from "@/lib/format";
 
 function getSpotlightCar() {
   const spotlight = cars.find((car) => car.spotlight);
@@ -25,22 +24,6 @@ function getSpotlightCar() {
   return sortedCars[0];
 }
 
-function formatCompactPrice(value: number) {
-  if (value >= 1_000_000) {
-    const millions = value / 1_000_000;
-
-    return `₱${millions
-      .toFixed(millions >= 10 ? 0 : 2)
-      .replace(/\.?0+$/, "")}M`;
-  }
-
-  if (value >= 1_000) {
-    return `₱${Math.round(value / 1_000)}K`;
-  }
-
-  return formatPrice(value);
-}
-
 export function Hero() {
   const car = getSpotlightCar();
 
@@ -48,136 +31,173 @@ export function Hero() {
     car.variant ? ` ${car.variant}` : ""
   }`;
 
-  const availableCount = cars.filter(
-    (unit) => unit.status === "Available",
-  ).length;
-
   return (
-    <section className="relative -mt-20 min-h-[100svh] overflow-hidden border-b border-white/10 bg-black md:-mt-28">
+    <section className="relative -mt-20 h-[100svh] overflow-hidden bg-[#111] md:-mt-28">
+      {/* Background image — architectural showroom */}
       <Image
-        src={car.images[0]}
-        alt={title}
+        src="/hero-bg.png"
+        alt="Showroom background"
         fill
         sizes="100vw"
-        className="-scale-x-100 object-cover object-[82%_center] brightness-[1.2] contrast-[1.05] saturate-[1.05]"
+        className="z-[1] object-cover object-center brightness-[1.5] contrast-[1.1]"
         fetchPriority="high"
         loading="eager"
         priority
       />
 
-      <div className="absolute inset-0 bg-black/10" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-black/5" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
+      {/* Top gradient for navbar readability over the bright skylight */}
+      <div className="absolute inset-x-0 top-0 z-[2] h-28 bg-gradient-to-b from-black/50 to-transparent" />
 
-      {/* Big background brand word */}
-      <div className="pointer-events-none absolute left-6 top-[18%] z-[2] hidden text-[14vw] font-black uppercase leading-none tracking-[-0.09em] text-white/[0.03] lg:block">
-        O2MACK
-      </div>
-      <Container className="relative z-10 flex min-h-[100svh] flex-col px-6 pb-6 pt-28 sm:pb-8 sm:pt-36 lg:pt-40">
-        {/* Top badge row */}
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            <Badge>
-              <span className="sm:hidden">Recently Pulled</span>
-              <span className="hidden sm:inline">
-                {car.highlightLabel ?? "Recently Pulled In"}
-              </span>
-            </Badge>
+      {/* Content layer — uses h-full to fill the section exactly */}
+      <Container className="relative z-10 flex h-[100svh] flex-col justify-between px-6 pb-5 pt-20 md:pt-27">
+        {/* ── Top: centered headline ── */}
+        <div className="shrink-0 text-center">
+          <h1 className="mx-auto max-w-3xl text-[clamp(2rem,6vw,3.8rem)] text-black font-black italic leading-[0.92] tracking-[-0.06em] text-black font-display [text-shadow:0_2px_8px_rgba(255,255,255,0.6)]">
+            Quality Cars.
+            <br />
+            Smooth Deals.
+          </h1>
 
-            <Badge status={car.status}>{car.status}</Badge>
-          </div>
+          <p className="mx-auto mt-3 max-w-md text-xs font-medium leading-relaxed text-slate-300 sm:text-sm">
+            Browse quality used cars in Metro Manila — SUVs, sedans, pickups,
+            and more. Straight deals, easy trade-ins, and full document support.
+            No pressure. Just your next drive.
+          </p>
         </div>
 
-        {/* Main hero content */}
-        <div className="flex flex-1 items-center py-10 lg:py-12">
-          <div className="max-w-[720px]">
-            <p className="text-[0.65rem] font-black uppercase tracking-[0.55em] text-orange-300 sm:text-sm">
-              Owner&apos;s Current Highlight
-            </p>
-
-            <h1 className="mt-5 max-w-3xl text-[3.8rem] font-black leading-[0.9] tracking-[-0.075em] text-white sm:text-7xl lg:text-[6.8rem]">
-              Find your next drive.
-            </h1>
-
-            <p className="mt-7 max-w-2xl text-base font-medium leading-8 text-slate-100 sm:text-lg">
-              Starting with this {title}. Direct car trading, viewing support,
-              and practical guidance for buying, selling, or trading units.
-            </p>
-
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href={`/cars/${car.slug}`} className="px-7 py-3.5">
-                View Highlight
-              </Button>
-
-              <Button
-                href="/sell-trade"
-                variant="secondary"
-                className="px-7 py-3.5"
-              >
-                Sell or Trade Mine
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom search + stats */}
-        <div className="grid gap-5 pb-2 lg:grid-cols-[minmax(0,560px)_1fr] lg:items-end lg:gap-12">
-          <form
-            action="/cars"
-            className="flex w-full items-center gap-2 rounded-2xl border border-white/15 bg-white/95 p-2 shadow-2xl shadow-black/50 backdrop-blur sm:max-w-[560px]"
+        {/* ── Middle: car showcase (takes remaining space) ── */}
+        <div className="relative flex min-h-0 flex-1 items-end justify-center pb-8">
+          {/* Big watermark text behind the car */}
+          <div
+            className="pointer-events-none absolute left-1/2 top-[30%] -translate-x-1/2 -translate-y-1/2 select-none text-[20vw] font-black leading-none tracking-[-0.08em] text-white/[0.05]"
+            aria-hidden="true"
           >
-            <label htmlFor="hero-search" className="sr-only">
-              Search inventory
-            </label>
+            O2MD
+          </div>
 
-            <input
-              id="hero-search"
-              name="search"
-              placeholder="What unit are you looking for?"
-              className="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm font-bold text-slate-950 outline-none placeholder:text-slate-500"
+          {/* Car image — scaled up significantly to look huge and sit on the floor */}
+          <div className="relative z-[2] w-full max-w-4xl lg:max-w-[72rem] -mb-5">
+            <Image
+              src="/cars/sakyanan.png"
+              alt={title}
+              width={1200}
+              height={600}
+              sizes="(max-width: 768px) 95vw, (max-width: 1200px) 85vw, 1200px"
+              className="mx-auto h-auto max-h-[58vh] w-full object-contain drop-shadow-[0_25px_65px_rgba(0,0,0,0.85)]"
+              fetchPriority="high"
+              loading="eager"
+              priority
             />
+          </div>
 
-            <button
-              type="submit"
-              className="min-h-12 cursor-pointer rounded-xl bg-slate-950 px-6 text-sm font-black text-white transition hover:bg-orange-500"
+          {/* Left Arrow button */}
+          <a
+            href="/cars"
+            className="absolute left-0 top-12 z-[3] hidden -translate-y-1/2 items-center justify-center rounded-xl border border-white/15 bg-white/5 p-3 text-white/70 backdrop-blur-md transition hover:border-orange-400/50 hover:bg-orange-500/10 hover:text-orange-400 lg:flex"
+            aria-label="Browse inventory"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              Search
-            </button>
-          </form>
+              <path d="M19 12H5" />
+              <path d="m12 19-7-7 7-7" />
+            </svg>
+          </a>
 
-          <div className="grid grid-cols-3 gap-3 rounded-2xl border border-white/10 bg-black/45 p-5 shadow-2xl shadow-black/40 backdrop-blur-xl sm:min-w-[460px] lg:ml-auto lg:max-w-[610px] lg:gap-8 lg:px-6">
-            <div className="min-w-0">
-              <p className="text-[clamp(1.7rem,7vw,2.2rem)] font-black leading-none text-white">
-                {availableCount}
-              </p>
-              <p className="mt-2 text-[0.58rem] font-black uppercase tracking-[0.32em] text-slate-400 sm:text-[0.68rem]">
-                Available
-              </p>
-            </div>
+          {/* Arrow / next button */}
+          <a
+            href="/cars"
+            className="absolute right-0 top-12 z-[3] hidden -translate-y-1/2 items-center justify-center rounded-xl border border-white/15 bg-white/5 p-3 text-white/70 backdrop-blur-md transition hover:border-orange-400/50 hover:bg-orange-500/10 hover:text-orange-400 lg:flex"
+            aria-label="Browse inventory"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
 
-            <div className="min-w-0">
-              <p className="text-[clamp(1.7rem,7vw,2.2rem)] font-black leading-none text-white">
-                {formatMileage(car.mileage).replace(" km", "")}
-              </p>
-              <p className="mt-2 text-[0.58rem] font-black uppercase tracking-[0.32em] text-slate-400 sm:text-[0.68rem]">
-                Mileage
-              </p>
-            </div>
+          {/* Featured model spec card */}
+          <div className="absolute bottom-8 right-0 z-[3] hidden border border-white/10 bg-white/95 px-6 py-5 shadow-2xl shadow-black/40 backdrop-blur lg:block">
+            <p className="text-[0.55rem] font-bold uppercase tracking-[0.25em] text-slate-500">
+              Featured Model
+            </p>
 
-            <div className="min-w-0">
-              <p className="truncate text-[clamp(1.55rem,6vw,2rem)] font-black leading-none text-orange-400 sm:hidden">
-                {formatCompactPrice(car.price)}
+            <p className="mt-1 text-xl font-black tracking-tight text-slate-950">
+              {car.brand} {car.model}{car.variant ? ` ${car.variant}` : ""}
+            </p>
+
+            <p className="mt-0.5 text-[0.55rem] uppercase tracking-[0.2em] text-slate-400">
+              {car.bodyType} · {car.color}
+            </p>
+
+            <div className="mt-2.5 border-t border-slate-200 pt-2.5">
+              <p className="text-[0.5rem] font-bold uppercase tracking-[0.25em] text-slate-400">
+                Mileage&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price
               </p>
 
-              <p className="hidden truncate text-2xl font-black leading-none text-orange-400 sm:block lg:text-[2rem]">
-                {formatPrice(car.price)}
-              </p>
+              <div className="mt-1 flex items-baseline gap-6">
+                <span className="text-base font-black text-slate-900">
+                  {car.mileage.toLocaleString("en-PH")} km
+                </span>
 
-              <p className="mt-2 text-[0.58rem] font-black uppercase tracking-[0.32em] text-slate-400 sm:text-[0.68rem]">
-                Price
+                <span className="text-base font-black text-slate-900">
+                  {formatPrice(car.price)}
+                </span>
+              </div>
+
+              <p className="mt-1.5 text-[0.5rem] uppercase tracking-[0.2em] text-slate-400">
+                {car.transmission} · {car.fuelType}
               </p>
             </div>
           </div>
+        </div>
+
+        {/* ── Bottom: CTA buttons ── */}
+        <div className="relative z-[3] flex shrink-0 flex-col items-center gap-2.5 sm:flex-row sm:justify-center">
+          <Button href="/cars" className="px-7 py-3">
+            <span className="text-black">Browse Inventory</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="ml-2 text-black"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </Button>
+
+          <Button
+            href="/sell-trade"
+            variant="ghost"
+            className="px-7 py-3"
+          >
+            Our Process
+          </Button>
         </div>
       </Container>
     </section>

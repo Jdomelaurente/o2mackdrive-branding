@@ -8,19 +8,33 @@ type CarGridProps = {
 export function CarGrid({ cars }: CarGridProps) {
   if (cars.length === 0) {
     return (
-      <div className="rounded-2xl border border-white/10 bg-zinc-950 p-6 text-center shadow-xl shadow-black/30 sm:p-10">
-        <p className="text-[0.66rem] font-bold uppercase tracking-[0.22em] text-orange-300 sm:text-xs sm:tracking-[0.24em]">No matching units</p>
-        <h2 className="mt-3 text-xl font-black text-white sm:text-2xl">No cars match your filters.</h2>
-        <p className="mt-3 text-sm leading-6 text-slate-400 sm:text-base">Adjust the search, price range, or unit status to widen the inventory list.</p>
+      <div className="border border-dashed border-slate-300 bg-slate-50 p-6 text-center sm:p-10 text-slate-800">
+        <p className="text-[0.66rem] font-bold uppercase tracking-[0.22em] text-slate-500 sm:text-xs sm:tracking-[0.24em]">No matching units</p>
+        <h2 className="mt-3 text-xl font-black text-slate-900 sm:text-2xl">No cars match your filters.</h2>
+        <p className="mt-3 text-sm leading-6 text-slate-500 sm:text-base">Adjust the search, price range, or unit status to widen the inventory list.</p>
       </div>
     );
   }
 
   return (
-    <div className="grid gap-4 sm:gap-5 md:grid-cols-2 2xl:grid-cols-3">
+    <div className="grid gap-4 sm:gap-6 md:grid-cols-2 xl:grid-cols-2">
       {cars.map((car) => (
         <CarCard key={car.id} car={car} />
       ))}
+      
+      {/* "New Arrival Coming" card */}
+      <div className="flex flex-col items-center justify-center border border-dashed border-slate-300 bg-slate-50/50 p-6 text-center aspect-[16/10] min-h-[280px]">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-400">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14" />
+            <path d="M12 5v14" />
+          </svg>
+        </div>
+        <h3 className="mt-4 text-xs font-black uppercase tracking-wider text-slate-900">New Arrival Coming</h3>
+        <p className="mt-2 max-w-[200px] text-[11px] leading-relaxed text-slate-400">
+          Our next acquisition is undergoing its 150-point audit.
+        </p>
+      </div>
     </div>
   );
 }

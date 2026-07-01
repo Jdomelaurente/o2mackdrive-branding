@@ -1,52 +1,94 @@
+"use client";
+
 import Link from "next/link";
-import { site } from "@/data/site";
-import { Button } from "@/components/ui/Button";
-import { BrandLogo } from "@/components/ui/BrandLogo";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "Inventory", href: "/cars" },
+  { label: "Sell/Trade", href: "/sell-trade" },
+  { label: "Services", href: "/financing" },
+  { label: "About", href: "/contact" },
+];
+
 export function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  // Pages with white backgrounds should always have the white/black navbar style
+  const isLightPage = pathname === "/sell-trade" || pathname === "/financing" || pathname === "/contact" || pathname.startsWith("/cars");
+  const isScrolledStyle = scrolled || isLightPage;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    // Set initial state in case page loads already scrolled
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="fixed right-3 top-3 z-50 md:inset-x-0 md:top-4 md:px-4">
-      <Container className="relative ml-auto flex w-fit max-w-none items-center justify-end rounded-2xl border border-transparent bg-transparent p-0 shadow-none md:mx-auto md:min-h-20 md:w-full md:max-w-7xl md:justify-between md:gap-6 md:border-white/10 md:bg-black/[0.82] md:px-5 md:py-3 md:shadow-2xl md:shadow-black/40 md:backdrop-blur-xl">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        isScrolledStyle
+          ? "bg-white/80 shadow-sm backdrop-blur-md"
+          : "bg-transparent"
+      }`}
+    >
+      <Container className="flex min-h-16 items-center justify-between px-6 py-4 md:min-h-20 md:py-5">
+        {/* Brand name */}
         <Link
           href="/"
-          className="group hidden min-w-0 flex-1 items-center md:flex md:flex-none"
+          className="text-lg font-black tracking-tight transition hover:opacity-80 sm:text-xl"
+          style={{ color: isScrolledStyle ? "#000000" : "#ffffff" }}
           aria-label="O2MackDrive home"
         >
-          <BrandLogo
-            size="md"
-            variant="wide"
-            className="h-16 w-80 transition duration-300 group-hover:opacity-80"
-          />
+          O2MackDrive
         </Link>
 
+        {/* Center navigation */}
         <nav
           aria-label="Primary navigation"
-          className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.045] p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-xl md:flex"
+          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 md:flex"
         >
-          {site.navigation.map((link) => (
+          {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-full px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-slate-300 transition-all duration-200 hover:bg-white/10 hover:text-white"
+              className="px-4 py-2 text-[13px] font-semibold transition hover:text-orange-500"
+              style={{ color: isScrolledStyle ? "#000000" : "#ffffffff" }}
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden shrink-0 md:flex">
-          <Button
-            href="/contact"
-            className="px-5 py-2.5 text-sm shadow-lg shadow-black/30 transition-transform duration-200 hover:-translate-y-0.5"
-          >
-            {site.primaryCtaLabel}
-          </Button>
-        </div>
+        {/* CTA button */}
+        <Link
+          href="/contact"
+          className={`hidden px-6 py-2.5 text-[13px] font-bold transition md:inline-flex ${
+            isScrolledStyle
+              ? "bg-slate-900 text-white hover:bg-slate-700"
+              : "bg-white hover:bg-slate-100"
+          }`}
+          style={isScrolledStyle ? {} : { color: "#000000" }}
+        >
+          Contact
+        </Link>
 
+        {/* Mobile menu */}
         <div className="md:hidden">
-          <MobileMenu links={site.navigation} ctaLabel={site.primaryCtaLabel} />
+          <MobileMenu
+            links={navLinks.map((l) => ({ label: l.label, href: l.href }))}
+            ctaLabel="Contact"
+          />
         </div>
       </Container>
     </header>

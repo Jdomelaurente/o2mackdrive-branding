@@ -17,7 +17,7 @@ export const cars: Car[] = [
     color: "Attitude Black",
     status: "Available",
     location: "Metro Manila",
-    images: ["/cars/fortuner.jpg", "/cars/placeholder-car.jpg"],
+    images: ["/cars/car-1.png", "/cars/car-2.png"],
     featured: true,
     spotlight: true,
     highlightLabel: "Recently Pulled In",
@@ -41,7 +41,7 @@ export const cars: Car[] = [
     color: "Rallye Red",
     status: "Available",
     location: "Quezon City",
-    images: ["/cars/civic.jpg", "/cars/placeholder-car.jpg"],
+    images: ["/cars/car-2.png", "/cars/car-3.png"],
     featured: true,
     description:
       "A sporty sedan with premium cabin details, responsive handling, and the everyday comfort Honda Civic buyers expect.",
@@ -62,7 +62,7 @@ export const cars: Car[] = [
     color: "Sterling Silver",
     status: "Reserved",
     location: "Pasig City",
-    images: ["/cars/montero.jpg", "/cars/placeholder-car.jpg"],
+    images: ["/cars/car-3.png", "/cars/car-1.png"],
     featured: true,
     description:
       "A refined seven-seat SUV built for long drives, family trips, and daily utility with confident diesel power.",
@@ -83,7 +83,7 @@ export const cars: Car[] = [
     color: "Super White",
     status: "Available",
     location: "Makati City",
-    images: ["/cars/vios.jpg", "/cars/placeholder-car.jpg"],
+    images: ["/cars/car-1.png", "/cars/car-3.png"],
     featured: false,
     description:
       "A practical, fuel-efficient sedan ideal for first-time buyers, city driving, and everyday transport.",
@@ -105,7 +105,7 @@ export const cars: Car[] = [
     color: "Meteor Grey",
     status: "Available",
     location: "Taguig City",
-    images: ["/cars/ranger.jpg", "/cars/placeholder-car.jpg"],
+    images: ["/cars/car-2.png", "/cars/car-1.png"],
     featured: false,
     description:
       "A capable pickup with strong road presence, modern equipment, and utility for workdays or weekend trips.",
@@ -127,7 +127,7 @@ export const cars: Car[] = [
     color: "Emotional Red",
     status: "Sold",
     location: "Manila City",
-    images: ["/cars/hilux.jpg", "/cars/placeholder-car.jpg"],
+    images: ["/cars/car-3.png", "/cars/car-2.png"],
     featured: false,
     description:
       "A tough and reliable pickup with proven Toyota durability, suitable for business, provincial drives, and daily use.",

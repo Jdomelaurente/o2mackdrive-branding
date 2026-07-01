@@ -1,122 +1,90 @@
 import Image from "next/image";
-import { cars } from "@/data/cars";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { formatPrice } from "@/lib/format";
+import { cars } from "@/data/cars";
+import { formatMileage, formatPrice } from "@/lib/format";
 
-function formatMileage(mileage: number) {
-  return `${mileage.toLocaleString()} km`;
-}
+// Pull the first 3 featured cars from real data
+const featuredArrivals = cars
+  .filter((car) => car.featured)
+  .slice(0, 3);
 
 export function FeaturedCars() {
-  const featuredCars = cars.slice(0, 3);
-
-  const getTitle = (car: (typeof cars)[number]) =>
-    `${car.year} ${car.brand} ${car.model}${car.variant ? ` ${car.variant}` : ""}`;
-
-  const getFuel = (car: (typeof cars)[number]) =>
-    (car as { fuel?: string; fuelType?: string }).fuel ??
-    (car as { fuelType?: string }).fuelType ??
-    "N/A";
-
   return (
-    <section className="page-section py-14 sm:py-24 lg:py-28">
-      <div className="section-fade" />
-
-      <Container className="relative">
-        <div className="mb-8 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between sm:gap-5">
+    <section className="bg-[#f9f9f9] py-16 text-black sm:py-24">
+      <Container>
+        <div className="mb-10 flex items-end justify-between border-b border-slate-200 pb-5">
           <div>
-            <p className="eyebrow">Fresh units</p>
-
-            <h2 className="section-title mt-3 max-w-2xl text-[2rem] sm:text-5xl lg:text-6xl">
-              Recently pulled in.
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+              New Arrivals
             </h2>
+            <p className="mt-2 text-sm text-slate-500">
+              The latest additions to our curated warehouse.
+            </p>
           </div>
 
-          <Button href="/cars" variant="secondary" className="w-fit px-6 py-3">
-            View All
-          </Button>
+          <Link
+            href="/cars"
+            className="text-xs font-bold uppercase tracking-wider text-slate-900 underline underline-offset-4 hover:text-orange-500"
+          >
+            View Full Warehouse
+          </Link>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {featuredCars.map((car) => {
-            const title = getTitle(car);
+        <div className="grid gap-8 md:grid-cols-3">
+          {featuredArrivals.map((car) => {
+            const title = `${car.year} ${car.brand} ${car.model}${car.variant ? ` ${car.variant}` : ""}`;
+            const statusColors: Record<string, string> = {
+              Available: "bg-black/90 text-white",
+              Reserved: "bg-amber-600 text-white",
+              Sold: "bg-slate-400 text-white",
+            };
 
             return (
-              <article
-                key={car.slug}
-                className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.035] p-2 shadow-2xl shadow-black/50 backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:border-orange-400/50 hover:bg-white/[0.055]"
-              >
-                <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100">
-                  <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-orange-300/80 to-transparent" />
-                  <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-orange-500/10 blur-3xl" />
-                </div>
+              <article key={car.id} className="flex flex-col group">
+                <Link href={`/cars/${car.slug}`} className="block">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-200">
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-300 flex items-center justify-center">
+                      <Image
+                        src={car.images[0]}
+                        alt={title}
+                        fill
+                        sizes="(min-width: 768px) 33vw, 100vw"
+                        className="object-cover transition duration-500 group-hover:scale-105"
+                      />
+                    </div>
 
-                <div className="relative overflow-hidden rounded-[1.5rem] bg-slate-950">
-                  <div className="relative aspect-[16/11] overflow-hidden">
-                    <Image
-                      src={car.images[0]}
-                      alt={title}
-                      fill
-                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                      className="object-cover transition duration-700 group-hover:scale-105"
-                    />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/10" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-transparent to-transparent" />
-
-                    <div className="absolute left-4 top-4 flex flex-wrap gap-2">
-                      <Badge status={car.status}>{car.status}</Badge>
-
-                      <span className="rounded-full border border-white/10 bg-black/50 px-3 py-1.5 text-[0.6rem] font-black uppercase tracking-[0.2em] text-white backdrop-blur-md">
-                        {car.bodyType}
+                    {/* Status Badge */}
+                    <div className="absolute left-3 top-3 z-10">
+                      <span className={`px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest ${statusColors[car.status]}`}>
+                        {car.status}
                       </span>
                     </div>
+                  </div>
+                </Link>
 
-                    <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3">
-                      <p className="text-[0.65rem] font-black uppercase tracking-[0.26em] text-orange-300">
-                        {car.year}
-                      </p>
-
-                      <p className="rounded-full border border-white/10 bg-black/50 px-3 py-1.5 text-[0.6rem] font-black uppercase tracking-[0.18em] text-slate-300 backdrop-blur-md">
-                        {car.location}
-                      </p>
-                    </div>
+                <div className="mt-4 flex flex-col">
+                  {/* Body type + color row */}
+                  <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                    <span>{car.bodyType}</span>
+                    <span>·</span>
+                    <span>{car.color}</span>
                   </div>
 
-                  <div className="p-4 sm:p-5">
-                    <h3 className="min-h-0 text-xl font-black leading-none tracking-[-0.055em] text-white sm:min-h-[3.5rem] sm:text-2xl">
+                  {/* Title + Price */}
+                  <div className="mt-1.5 flex items-baseline justify-between gap-2">
+                    <h3 className="text-base font-bold text-slate-900 transition group-hover:text-orange-500">
                       {title}
                     </h3>
-
-                    <p className="mt-4 break-words text-2xl font-black leading-none tracking-[-0.05em] text-orange-400 sm:text-3xl">
+                    <span className="shrink-0 text-base font-bold text-slate-900">
                       {formatPrice(car.price)}
-                    </p>
-
-                    <div className="mt-5 grid grid-cols-3 gap-2">
-                      <Spec label="KM" value={formatMileage(car.mileage)} />
-                      <Spec label="Trans" value={car.transmission} />
-                      <Spec label="Fuel" value={getFuel(car)} />
-                    </div>
-
-                    <div className="mt-5 grid grid-cols-2 gap-3">
-                      <Button
-                        href={`/cars/${car.slug}`}
-                        variant="secondary"
-                        className="py-3"
-                      >
-                        Details
-                      </Button>
-
-                      <Button
-                        href={`/contact?car=${car.slug}`}
-                        className="py-3"
-                      >
-                        Ask
-                      </Button>
-                    </div>
+                    </span>
                   </div>
+
+                  {/* Mileage + Transmission */}
+                  <p className="mt-1 text-xs text-slate-500">
+                    {car.year} · {formatMileage(car.mileage)} · {car.transmission}
+                  </p>
                 </div>
               </article>
             );
@@ -124,17 +92,5 @@ export function FeaturedCars() {
         </div>
       </Container>
     </section>
-  );
-}
-
-function Spec({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="min-w-0 rounded-2xl border border-white/10 bg-black/45 px-3 py-3 backdrop-blur-md">
-      <p className="text-[0.52rem] font-black uppercase tracking-[0.18em] text-slate-500">
-        {label}
-      </p>
-
-      <p className="mt-1 truncate text-xs font-bold text-white">{value}</p>
-    </div>
   );
 }

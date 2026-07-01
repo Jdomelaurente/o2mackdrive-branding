@@ -1,113 +1,134 @@
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
-import { cars } from "@/data/cars";
 
-const reasons = [
+const features = [
   {
-    label: "Clear details",
-    value: "01",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth="1.5"
+        stroke="currentColor"
+        className="h-6 w-6 text-slate-900"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+        />
+      </svg>
+    ),
+    title: "Upfront & Honest",
+    description:
+      "We show real prices, real status (Available, Reserved, Sold), and real specs — no hidden charges, no bait-and-switch. What you see is what you get.",
   },
   {
-    label: "Direct inquiry",
-    value: "02",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth="1.5"
+        stroke="currentColor"
+        className="h-6 w-6 text-slate-900"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
+        />
+      </svg>
+    ),
+    title: "Fast, Simple Process",
+    description:
+      "Inquire, schedule a viewing, and close the deal — all in a few steps. No endless back-and-forth. We respect your time and keep the transaction moving.",
   },
   {
-    label: "Trade support",
-    value: "03",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth="1.5"
+        stroke="currentColor"
+        className="h-6 w-6 text-slate-900"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12z"
+        />
+      </svg>
+    ),
+    title: "Quality Units Only",
+    description:
+      "Every car in our lot is personally checked before listing — we don't add units we wouldn't drive ourselves. SUVs, sedans, and pickups that are ready to go.",
   },
   {
-    label: "Viewing help",
-    value: "04",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth="1.5"
+        stroke="currentColor"
+        className="h-6 w-6 text-slate-900"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-3.375c0-.621-.504-1.125-1.125-1.125h-6.75a1.125 1.125 0 0 0-1.125 1.125v3.375m9 0h-9M9 6a3 3 0 1 1 6 0 3 3 0 0 1-6 0Z"
+        />
+      </svg>
+    ),
+    title: "Trade-In Friendly",
+    description:
+      "Got a car to swap? We handle trade-ins directly — no dealership middleman. Bring your unit, we'll assess it and apply it toward your next purchase.",
   },
-];
-
-const highlights = [
-  "Real inventory",
-  "Upfront specs",
-  "Bank-assisted options",
-  "Simple next steps",
 ];
 
 export function WhyChooseUs() {
-  const heroCar = cars.find((car) => car.spotlight) ?? cars[0];
-
   return (
-    <section className="page-section border-y border-white/10 py-14 text-white sm:py-24 lg:py-28">
-      <div className="section-fade" />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+    <section className="bg-white py-20 text-black sm:py-28">
+      <Container>
+        <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20">
+          {/* Left Column */}
+          <div>
+            <h2 className="text-4xl font-black leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+              The
+              <br />
+              O2Mack
+              <br />
+              Way.
+            </h2>
+            <p className="mt-6 max-w-xs text-sm leading-relaxed text-slate-500">
+              We run a straightforward car trading desk in Metro Manila. No pressure, no fluff — just quality units, clear prices, and smooth deals.
+            </p>
+          </div>
 
-      <Container className="relative">
-        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
-          <div className="flex flex-col justify-between rounded-[1.5rem] border border-white/10 bg-white/[0.07] p-4 shadow-2xl shadow-black/50 backdrop-blur-xl sm:rounded-[2rem] sm:p-8 lg:p-10">
-            <div>
-              <p className="text-[0.66rem] font-black uppercase tracking-[0.32em] text-orange-300 sm:text-xs sm:tracking-[0.42em]">
-                Why MackDrive
-              </p>
-
-              <h2 className="mt-4 max-w-xl text-[2rem] font-black leading-none tracking-[-0.07em] text-white sm:text-5xl lg:text-6xl">
-                Built for straight deals.
-              </h2>
-            </div>
-
-            <div className="mt-8 grid grid-cols-2 gap-2.5 sm:mt-10 sm:gap-3">
-              {highlights.map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-white/10 bg-black/40 px-3 py-3 sm:px-4 sm:py-4"
-                >
-                  <div className="mb-3 h-1 w-8 rounded-full bg-orange-400" />
-                  <p className="text-sm font-black text-white">{item}</p>
+          {/* Right Column (2x2 Grid) */}
+          <div className="grid gap-x-12 gap-y-12 sm:grid-cols-2">
+            {features.map((feature, index) => (
+              <div key={index} className="flex flex-col items-start">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100">
+                  {feature.icon}
                 </div>
-              ))}
-            </div>
-          </div>
 
-          <div className="group relative min-h-[360px] overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950 shadow-2xl shadow-black/50 sm:min-h-[460px] sm:rounded-[2rem] lg:min-h-[560px]">
-            <Image
-              src={heroCar.images[0]}
-              alt={`${heroCar.brand} ${heroCar.model}`}
-              fill
-              sizes="(max-width: 1024px) 100vw, 58vw"
-              className="object-cover transition duration-700 group-hover:scale-105"
-            />
-
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/20" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/20 to-transparent" />
-
-            <div className="absolute left-5 top-5 rounded-full border border-white/10 bg-black/45 px-4 py-2 text-[0.65rem] font-black uppercase tracking-[0.24em] text-orange-300 backdrop-blur-md">
-              Current highlight
-            </div>
-
-            <div className="absolute bottom-4 left-4 right-4 sm:bottom-5 sm:left-5 sm:right-5">
-              <div className="rounded-[1.25rem] border border-white/10 bg-slate-950/65 p-4 backdrop-blur-xl sm:rounded-[1.5rem] sm:p-6">
-                <p className="text-xs font-black uppercase tracking-[0.28em] text-slate-400">
-                  Featured unit
-                </p>
-
-                <h3 className="mt-2 text-2xl font-black leading-none tracking-[-0.06em] text-white sm:text-4xl">
-                  {heroCar.year} {heroCar.brand} {heroCar.model}
+                <h3 className="text-lg font-bold text-slate-900">
+                  {feature.title}
                 </h3>
+
+                <p className="mt-2 text-sm leading-relaxed text-slate-500">
+                  {feature.description}
+                </p>
               </div>
-            </div>
+            ))}
           </div>
-        </div>
-
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {reasons.map((reason) => (
-            <div
-              key={reason.label}
-              className="group rounded-[1.25rem] border border-white/10 bg-white/[0.035] p-4 shadow-xl shadow-black/30 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-orange-400/50 hover:bg-orange-500/10 sm:rounded-[1.5rem] sm:p-5"
-            >
-              <p className="text-xs font-black uppercase tracking-[0.28em] text-orange-300">
-                {reason.value}
-              </p>
-
-              <p className="mt-6 text-lg font-black tracking-[-0.04em] text-white sm:mt-8 sm:text-xl">
-                {reason.label}
-              </p>
-            </div>
-          ))}
         </div>
       </Container>
     </section>

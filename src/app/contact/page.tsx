@@ -1,54 +1,82 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { SectionHeader } from "@/components/ui/SectionHeader";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Contact O2MackDrive Car Trading for car inquiries, selling, trade-ins, and financing assistance.",
+  description: "Contact O2MackDrive Car Trading for car inquiries, selling, trade-ins, and financing assistance in Metro Manila.",
 };
 
 export default function ContactPage() {
   return (
-    <section className="garage-surface border-b border-white/10 py-8 sm:py-20">
-      <Container className="grid gap-6 sm:gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-        <div className="grid gap-5 sm:gap-6">
-          <SectionHeader
-            eyebrow="Contact"
-            title="Talk to O2MackDrive"
-            description="Send an inquiry, call directly, or message on Messenger for available cars, viewing schedules, and trade-in discussions."
-          />
-
-          <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/60 shadow-2xl shadow-black/30">
-            <div className="border-b border-white/10 bg-white/[0.035] px-4 py-4 sm:px-5">
-              <p className="text-[0.65rem] font-black uppercase tracking-[0.24em] text-orange-300">
-                Direct contact
-              </p>
-              <p className="mt-2 text-sm leading-6 text-slate-400">
-                Best for viewing schedules, unit availability, and trade-in
-                conversations.
-              </p>
-            </div>
-
-            <dl className="divide-y divide-white/10">
-              <ContactItem label="Phone" value={site.phone} href={`tel:${site.phone.replaceAll(" ", "")}`} />
-              <ContactItem label="Email" value={site.email} href={`mailto:${site.email}`} />
-              <ContactItem label="Location" value={site.location} />
-            </dl>
-
-            <div className="grid gap-2.5 border-t border-white/10 p-4 sm:grid-cols-2 sm:p-5">
-              <Button href={`tel:${site.phone.replaceAll(" ", "")}`}>Call Now</Button>
-              <Button href={site.messengerLink} variant="secondary" target="_blank" rel="noreferrer">
-                Messenger
-              </Button>
-            </div>
+    <section className="bg-white -mt-20 pt-32 md:-mt-28 md:pt-40 pb-16 text-slate-900 min-h-screen">
+      <Container>
+        {/* Header */}
+        <div className="border-b border-slate-200 pb-8 mb-12">
+          <h1 className="text-4xl font-black tracking-tight text-slate-950 sm:text-5xl uppercase">
+            Get in Touch.
+          </h1>
+          <div className="mt-4 border-l-2 border-slate-900 pl-4">
+            <p className="text-sm text-slate-600 max-w-xl leading-relaxed">
+              Send an inquiry, call directly, or message on Messenger for available cars, viewing schedules, and trade-in discussions.
+            </p>
           </div>
         </div>
 
-        <div id="contact-form">
-          <ContactForm />
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          {/* Left: Direct Contact Info */}
+          <div className="grid gap-8">
+            {/* Contact Card */}
+            <div className="border border-slate-200 bg-white shadow-sm">
+              <div className="border-b border-slate-200 px-5 py-4">
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Direct Contact</p>
+                <p className="mt-1.5 text-xs text-slate-500">
+                  Best for viewing schedules, unit availability, and trade-in conversations.
+                </p>
+              </div>
+
+              <div className="divide-y divide-slate-100">
+                <ContactItem label="Phone" value={site.phone} href={`tel:${site.phone.replaceAll(" ", "")}`} />
+                <ContactItem label="Email" value={site.email} href={`mailto:${site.email}`} />
+                <ContactItem label="Location" value={site.location} />
+              </div>
+
+              <div className="grid grid-cols-2 gap-2.5 border-t border-slate-200 p-4">
+                <Link
+                  href={`tel:${site.phone.replaceAll(" ", "")}`}
+                  className="bg-black px-4 py-2.5 text-center text-[10px] font-black uppercase tracking-widest text-white transition hover:bg-slate-900"
+                  style={{ color: "#ffffff" }}
+                >
+                  Call Now
+                </Link>
+                <Link
+                  href={site.messengerLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="border border-slate-200 px-4 py-2.5 text-center text-[10px] font-black uppercase tracking-widest text-slate-900 transition hover:bg-slate-50"
+                >
+                  Messenger
+                </Link>
+              </div>
+            </div>
+
+            {/* Hours / Note */}
+            <div className="border border-dashed border-slate-200 bg-slate-50/50 p-5">
+              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Operating Hours</p>
+              <p className="mt-2 text-sm font-bold text-slate-900">Monday – Saturday</p>
+              <p className="mt-0.5 text-xs text-slate-500">9:00 AM – 6:00 PM</p>
+              <p className="mt-3 text-xs leading-relaxed text-slate-500">
+                Viewings and discussions can also be arranged outside regular hours via Messenger.
+              </p>
+            </div>
+          </div>
+
+          {/* Right: Contact Form */}
+          <div id="contact-form">
+            <ContactForm />
+          </div>
         </div>
       </Container>
     </section>
@@ -66,10 +94,10 @@ function ContactItem({
 }) {
   const content = (
     <>
-      <dt className="text-[0.65rem] font-black uppercase tracking-[0.2em] text-slate-500">
+      <dt className="text-[10px] font-black uppercase tracking-wider text-slate-400">
         {label}
       </dt>
-      <dd className="mt-1 break-words text-sm font-semibold leading-6 text-slate-100 sm:text-base">
+      <dd className="mt-1 break-words text-sm font-semibold leading-6 text-slate-900">
         {value}
       </dd>
     </>
@@ -80,7 +108,7 @@ function ContactItem({
       <div>
         <a
           href={href}
-          className="block px-4 py-4 transition hover:bg-white/[0.035] sm:px-5"
+          className="block px-5 py-4 transition hover:bg-slate-50"
         >
           {content}
         </a>
@@ -88,5 +116,5 @@ function ContactItem({
     );
   }
 
-  return <div className="px-4 py-4 sm:px-5">{content}</div>;
+  return <div className="px-5 py-4">{content}</div>;
 }
