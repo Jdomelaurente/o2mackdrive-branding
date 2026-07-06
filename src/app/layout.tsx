@@ -28,8 +28,8 @@ export const metadata: Metadata = {
   description: site.description,
   keywords: ["O2MackDrive", "car trading Philippines", "used cars Philippines", "buy sell trade cars"],
   icons: {
-    icon: "/logo-new.png",
-    shortcut: "/logo-new.png",
+    icon: "/favicon-64.png",
+    shortcut: "/favicon-64.png",
     apple: "/logo-new.png",
   },
   openGraph: {

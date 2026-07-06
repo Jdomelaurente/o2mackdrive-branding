@@ -101,6 +101,15 @@ export default function FinancingPage() {
             className="object-cover object-center contrast-110 saturate-75"
             priority
           />
+          <div className="absolute inset-0 flex justify-center items-center pt-30">
+            <Image
+              src="/logo-new.png"
+              alt="O2MackDrive logo"
+              width={500}
+              height={180}
+              className="object-contain"
+            />
+          </div>
         </div>
 
         <section className="py-12 sm:py-16">
