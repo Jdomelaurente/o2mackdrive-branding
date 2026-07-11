@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
 
 const features = [
   {
@@ -98,35 +99,39 @@ export function WhyChooseUs() {
       <Container>
         <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20">
           {/* Left Column */}
-          <div>
-            <h2 className="text-4xl font-black leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-              The
-              <br />
-              O2Mack
-              <br />
-              Way.
-            </h2>
-            <p className="mt-6 max-w-xs text-sm leading-relaxed text-slate-500">
-              We run a straightforward car trading desk in Metro Manila. No pressure, no fluff — just quality units, clear prices, and smooth deals.
-            </p>
-          </div>
+          <Reveal direction="left">
+            <div>
+              <h2 className="text-4xl font-black leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+                The
+                <br />
+                O2Mack
+                <br />
+                Way.
+              </h2>
+              <p className="mt-6 max-w-xs text-sm leading-relaxed text-slate-500">
+                We run a straightforward car trading desk in Metro Manila. No pressure, no fluff — just quality units, clear prices, and smooth deals.
+              </p>
+            </div>
+          </Reveal>
 
           {/* Right Column (2x2 Grid) */}
           <div className="grid gap-x-12 gap-y-12 sm:grid-cols-2">
             {features.map((feature, index) => (
-              <div key={index} className="flex flex-col items-start">
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100">
-                  {feature.icon}
+              <Reveal key={index} direction="up" delay={index * 100}>
+                <div className="flex flex-col items-start">
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100">
+                    {feature.icon}
+                  </div>
+
+                  <h3 className="text-lg font-bold text-slate-900">
+                    {feature.title}
+                  </h3>
+
+                  <p className="mt-2 text-sm leading-relaxed text-slate-500">
+                    {feature.description}
+                  </p>
                 </div>
-
-                <h3 className="text-lg font-bold text-slate-900">
-                  {feature.title}
-                </h3>
-
-                <p className="mt-2 text-sm leading-relaxed text-slate-500">
-                  {feature.description}
-                </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>

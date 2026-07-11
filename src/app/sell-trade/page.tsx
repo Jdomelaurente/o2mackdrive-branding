@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { SellTradeForm } from "@/components/forms/SellTradeForm";
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
 import { CarImageUpload } from "@/components/forms/CarImageUpload";
 
 export const metadata: Metadata = {
@@ -29,43 +30,51 @@ export default function SellTradePage() {
     <section className="bg-white -mt-20 pt-32 md:-mt-28 md:pt-40 pb-16 text-slate-900 min-h-screen">
       <Container>
         {/* Header Block */}
-        <div className="border-b border-slate-200 pb-8 mb-10">
-          <h1 className="text-4xl font-black tracking-tight text-slate-950 sm:text-5xl uppercase">
-            Sell / Trade Your Drive.
-          </h1>
-          <div className="mt-4 border-l-2 border-slate-900 pl-4">
-            <p className="text-sm text-slate-600 max-w-xl leading-relaxed">
-              We make selling or trading your vehicle straightforward. Provide your vehicle details for an upfront, honest valuation.
-            </p>
+        <Reveal direction="up">
+          <div className="border-b border-slate-200 pb-8 mb-10">
+            <h1 className="text-4xl font-black tracking-tight text-slate-950 sm:text-5xl uppercase">
+              Sell / Trade Your Drive.
+            </h1>
+            <div className="mt-4 border-l-2 border-slate-900 pl-4">
+              <p className="text-sm text-slate-600 max-w-xl leading-relaxed">
+                We make selling or trading your vehicle straightforward. Provide your vehicle details for an upfront, honest valuation.
+              </p>
+            </div>
           </div>
-        </div>
+        </Reveal>
 
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] items-start">
           {/* Left Column: Benefits */}
-          <div className="grid gap-6">
-            {benefits.map((benefit, index) => (
-              <div key={benefit.title} className="flex gap-4 items-start">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xs font-black text-slate-900">
-                  0{index + 1}
-                </span>
-                <div>
-                  <h3 className="text-sm font-black uppercase tracking-wider text-slate-900">{benefit.title}</h3>
-                  <p className="mt-1.5 text-xs leading-relaxed text-slate-500 max-w-sm">{benefit.description}</p>
+          <Reveal direction="left" delay={150}>
+            <div className="grid gap-6">
+              {benefits.map((benefit, index) => (
+                <div key={benefit.title} className="flex gap-4 items-start">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xs font-black text-slate-900">
+                    0{index + 1}
+                  </span>
+                  <div>
+                    <h3 className="text-sm font-black uppercase tracking-wider text-slate-900">{benefit.title}</h3>
+                    <p className="mt-1.5 text-xs leading-relaxed text-slate-500 max-w-sm">{benefit.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </Reveal>
 
           {/* Right Column: Multi-step Form */}
-          <div className="relative">
-            <SellTradeForm />
-          </div>
+          <Reveal direction="right" delay={200}>
+            <div className="relative">
+              <SellTradeForm />
+            </div>
+          </Reveal>
         </div>
 
         {/* Upload your car image */}
-        <div className="mt-12">
-          <CarImageUpload />
-        </div>
+        <Reveal direction="up" delay={250}>
+          <div className="mt-12">
+            <CarImageUpload />
+          </div>
+        </Reveal>
       </Container>
     </section>
   );

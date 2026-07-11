@@ -37,8 +37,8 @@ export function Hero() {
         return i === sliderCars.length - 1 ? 0 : i + 1;
       });
       setFlipState("in");
-    }, 150);
-    setTimeout(() => setFlipState("idle"), 300);
+    }, 220);
+    setTimeout(() => setFlipState("idle"), 520);
   };
 
   const prevImage = () => changeCar("prev");
@@ -65,13 +65,13 @@ export function Hero() {
       <Container className="relative z-10 flex h-[100svh] flex-col justify-between px-6 pb-5 pt-0 md:pt-27">
         {/* ── Top: centered headline ── */}
         <div className="shrink-0 text-center">
-          <h1 className="mx-auto max-w-3xl text-[clamp(2rem,6vw,3.8rem)] text-black font-black italic leading-[0.92] tracking-[-0.06em] text-black font-display [text-shadow:0_2px_8px_rgba(255,255,255,0.6)]">
+          <h1 className="mx-auto max-w-3xl text-[clamp(2rem,6vw,3.8rem)] text-black font-black italic leading-[0.92] tracking-[-0.06em] font-display [text-shadow:0_2px_8px_rgba(255,255,255,0.6)] animate-fade-in-up">
             Quality Cars.
             <br />
             Smooth Deals.
           </h1>
 
-          <p className="mx-auto mt-3 max-w-md text-xs font-medium leading-relaxed text-slate-300 sm:text-sm">
+          <p className="mx-auto mt-3 max-w-md text-xs font-medium leading-relaxed text-slate-300 sm:text-sm animate-fade-in-up delay-100">
             Browse quality used cars in Metro Manila — SUVs, sedans, pickups,
             and more. Straight deals, easy trade-ins, and full document support.
             No pressure. Just your next drive.
@@ -92,6 +92,7 @@ export function Hero() {
           <div
             className={
               "relative z-[2] w-full max-w-4xl lg:max-w-[35rem] -mb-5" +
+              (flipState === "idle" ? " animate-fade-in-scale delay-150" : "") +
               (flipState === "out"
                 ? slideDir === "left"
                   ? " animate-car-out-left"
@@ -105,6 +106,7 @@ export function Hero() {
             }
           >
             <Image
+              key={currentIndex}
               src={carImages[currentIndex]}
               alt={title}
               width={1000}
@@ -161,51 +163,56 @@ export function Hero() {
             </svg>
           </button>
 
-          {/* Featured model spec card */}
+          {/* Featured model spec card — 3D flip wrapper */}
           <div
-            className={
-              `absolute bottom-8 right-0 z-[3] hidden border border-white/10 bg-white/95 px-6 py-5 shadow-2xl shadow-black/40 backdrop-blur lg:block` +
-              (flipState === "out" ? " animate-flip-out" : "") +
-              (flipState === "in" ? " animate-flip-in" : "")
-            }
-            style={{ perspective: "1000px", transformStyle: "preserve-3d", backfaceVisibility: "hidden" }}
+            className="absolute bottom-8 right-0 z-[3] hidden lg:block animate-fade-in-up delay-300"
+            style={{ perspective: "800px" }}
           >
-            <p className="text-[0.55rem] font-bold uppercase tracking-[0.25em] text-slate-500">
-              Featured Model
-            </p>
-
-            <p className="mt-1 text-xl font-black tracking-tight text-slate-950">
-              {car.brand} {car.model}{car.variant ? ` ${car.variant}` : ""}
-            </p>
-
-            <p className="mt-0.5 text-[0.55rem] uppercase tracking-[0.2em] text-slate-400">
-              {car.bodyType} · {car.color}
-            </p>
-
-            <div className="mt-2.5 border-t border-slate-200 pt-2.5">
-              <p className="text-[0.5rem] font-bold uppercase tracking-[0.25em] text-slate-400">
-                Mileage&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price
+            <div
+              className={
+                "border border-white/10 bg-white/95 px-6 py-5 shadow-2xl shadow-black/40 backdrop-blur" +
+                (flipState === "out" ? " animate-flip-out" : "") +
+                (flipState === "in" ? " animate-flip-in" : "")
+              }
+              style={{ transformOrigin: "center", backfaceVisibility: "hidden", willChange: "transform, opacity" }}
+            >
+              <p className="text-[0.55rem] font-bold uppercase tracking-[0.25em] text-slate-500">
+                Featured Model
               </p>
 
-              <div className="mt-1 flex items-baseline gap-6">
-                <span className="text-base font-black text-slate-900">
-                  {car.mileage.toLocaleString("en-PH")} km
-                </span>
+              <p className="mt-1 text-xl font-black tracking-tight text-slate-950">
+                {car.brand} {car.model}{car.variant ? ` ${car.variant}` : ""}
+              </p>
 
-                <span className="text-base font-black text-slate-900">
-                  {formatPrice(car.price)}
-                </span>
+              <p className="mt-0.5 text-[0.55rem] uppercase tracking-[0.2em] text-slate-400">
+                {car.bodyType} · {car.color}
+              </p>
+
+              <div className="mt-2.5 border-t border-slate-200 pt-2.5">
+                <p className="text-[0.5rem] font-bold uppercase tracking-[0.25em] text-slate-400">
+                  Mileage&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price
+                </p>
+
+                <div className="mt-1 flex items-baseline gap-6">
+                  <span className="text-base font-black text-slate-900">
+                    {car.mileage.toLocaleString("en-PH")} km
+                  </span>
+
+                  <span className="text-base font-black text-slate-900">
+                    {formatPrice(car.price)}
+                  </span>
+                </div>
+
+                <p className="mt-1.5 text-[0.5rem] uppercase tracking-[0.2em] text-slate-400">
+                  {car.transmission} · {car.fuelType}
+                </p>
               </div>
-
-              <p className="mt-1.5 text-[0.5rem] uppercase tracking-[0.2em] text-slate-400">
-                {car.transmission} · {car.fuelType}
-              </p>
             </div>
           </div>
         </div>
 
         {/* ── Bottom: CTA buttons ── */}
-        <div className="relative z-[3] flex shrink-0 flex-col items-center gap-2.5 sm:flex-row sm:justify-center">
+        <div className="relative z-[3] flex shrink-0 flex-col items-center gap-2.5 sm:flex-row sm:justify-center animate-fade-in-up delay-200">
           <Button href="/cars" className="px-7 py-3">
             <span className="text-black">Browse Inventory</span>
             <svg

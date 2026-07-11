@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
 import { faqs } from "@/data/faqs";
 import { site } from "@/data/site";
 
@@ -61,92 +62,106 @@ export default function FinancingPage() {
     <main className="-mt-20 bg-[#f7f5f2] pt-28 text-black md:-mt-28 md:pt-36">
       <Container>
         <section className="grid gap-8 border-b border-black/10 pb-10 lg:grid-cols-[1fr_19rem] lg:items-start">
-          <div>
-            <p className="text-[0.62rem] font-black uppercase tracking-[0.28em] text-black/45">
-              Services desk
-            </p>
-            <h1 className="mt-3 max-w-3xl text-4xl font-black leading-[0.95] tracking-tight text-black sm:text-6xl lg:text-7xl">
-              Engineering Trust.
-            </h1>
-            <p className="mt-5 max-w-2xl text-sm font-medium leading-6 text-black/55">
-              O2MackDrive is the desk that keeps the deal moving: curated cars,
-              clear viewing, document guidance, financing support, and practical
-              sell-or-trade conversations.
-            </p>
-          </div>
+          <Reveal direction="left">
+            <div>
+              <p className="text-[0.62rem] font-black uppercase tracking-[0.28em] text-black/45">
+                Services desk
+              </p>
+              <h1 className="mt-3 max-w-3xl text-4xl font-black leading-[0.95] tracking-tight text-black sm:text-6xl lg:text-7xl">
+                Engineering Trust.
+              </h1>
+              <p className="mt-5 max-w-2xl text-sm font-medium leading-6 text-black/55">
+                O2MackDrive is the desk that keeps the deal moving: curated cars,
+                clear viewing, document guidance, financing support, and practical
+                sell-or-trade conversations.
+              </p>
+            </div>
+          </Reveal>
 
-          <div className="grid gap-3">
-            <Link
-              href="/cars"
-              className="bg-black px-5 py-3 text-center text-[0.62rem] font-black uppercase tracking-[0.22em] text-white transition hover:bg-zinc-800"
-              style={{ color: "#ffffff" }}
-            >
-              View the cars
-            </Link>
-            <Link
-              href="/contact"
-              className="border border-black/30 px-5 py-3 text-center text-[0.62rem] font-black uppercase tracking-[0.22em] text-black transition hover:border-black hover:bg-white"
-            >
-              Request guidance
-            </Link>
-          </div>
+          <Reveal direction="right" delay={150}>
+            <div className="grid gap-3">
+              <Link
+                href="/cars"
+                className="bg-black px-5 py-3 text-center text-[0.62rem] font-black uppercase tracking-[0.22em] text-white transition hover:bg-zinc-800"
+                style={{ color: "#ffffff" }}
+              >
+                View the cars
+              </Link>
+              <Link
+                href="/contact"
+                className="border border-black/30 px-5 py-3 text-center text-[0.62rem] font-black uppercase tracking-[0.22em] text-black transition hover:border-black hover:bg-white"
+              >
+                Request guidance
+              </Link>
+            </div>
+          </Reveal>
         </section>
 
-        <div className="relative mt-8 aspect-[16/6.8] min-h-[15rem] overflow-hidden bg-zinc-200">
-          <Image
-            src="/hero-bg.png"
-            alt="Vehicle in the O2MackDrive showroom"
-            fill
-            sizes="(min-width: 1280px) 1200px, 100vw"
-            className="object-cover object-center contrast-110 saturate-75"
-            priority
-          />
-          <div className="absolute inset-0 flex justify-center items-center pt-30">
+        <Reveal direction="scale" delay={200}>
+          <div className="relative mt-8 aspect-[16/6.8] min-h-[15rem] overflow-hidden bg-zinc-200">
             <Image
-              src="/logo-new.png"
-              alt="O2MackDrive logo"
-              width={500}
-              height={180}
-              className="object-contain"
+              src="/hero-bg.png"
+              alt="Vehicle in the O2MackDrive showroom"
+              fill
+              sizes="(min-width: 1280px) 1200px, 100vw"
+              className="object-cover object-center contrast-110 saturate-75"
+              priority
             />
+            <div className="absolute inset-0 flex justify-center items-center pt-30">
+              <Image
+                src="/logo-new.png"
+                alt="O2MackDrive logo"
+                width={500}
+                height={180}
+                className="object-contain"
+              />
+            </div>
           </div>
-        </div>
+        </Reveal>
 
         <section className="py-12 sm:py-16">
-          <p className="text-[0.58rem] font-black uppercase tracking-[0.28em] text-black/35">
-            Match your move
-          </p>
-          <h2 className="mt-2 text-2xl font-black tracking-tight text-black sm:text-4xl">
-            Our Process
-          </h2>
+          <Reveal direction="up">
+            <p className="text-[0.58rem] font-black uppercase tracking-[0.28em] text-black/35">
+              Match your move
+            </p>
+            <h2 className="mt-2 text-2xl font-black tracking-tight text-black sm:text-4xl">
+              Our Process
+            </h2>
+          </Reveal>
 
           <div className="mt-8 grid gap-4 lg:grid-cols-[1.55fr_0.9fr]">
-            {processCards.slice(0, 2).map((service) => (
-              <ServiceCard key={service.number} service={service} featured />
+            {processCards.slice(0, 2).map((service, index) => (
+              <Reveal key={service.number} direction="up" delay={index * 100}>
+                <ServiceCard service={service} featured />
+              </Reveal>
             ))}
           </div>
 
           <div className="mt-4 grid gap-4 lg:grid-cols-[0.9fr_1fr_0.78fr]">
-            {processCards.slice(2).map((service) => (
-              <ServiceCard key={service.number} service={service} />
+            {processCards.slice(2).map((service, index) => (
+              <Reveal key={service.number} direction="up" delay={index * 100}>
+                <ServiceCard service={service} />
+              </Reveal>
             ))}
 
-            <aside className="bg-[#eceae7] p-6">
-              <p className="text-[0.6rem] font-black uppercase tracking-[0.24em] text-black/35">
-                Profile
-              </p>
-              <dl className="mt-5 grid gap-4">
-                {serviceStats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="flex items-center justify-between border-b border-black/10 pb-3 text-xs"
-                  >
-                    <dt className="font-bold text-black/45">{stat.label}</dt>
-                    <dd className="font-black text-black">{stat.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </aside>
+            <Reveal direction="up" delay={300}>
+              <aside className="bg-[#eceae7] p-6 h-full">
+                <p className="text-[0.6rem] font-black uppercase tracking-[0.24em] text-black/35">
+                  Profile
+                </p>
+                <dl className="mt-5 grid gap-4">
+                  {serviceStats.map((stat) => (
+                    <div
+                      key={stat.label}
+                      className="flex items-center justify-between border-b border-black/10 pb-3 text-xs"
+                    >
+                      <dt className="font-bold text-black/45">{stat.label}</dt>
+                      <dd className="font-black text-black">{stat.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </aside>
+            </Reveal>
           </div>
         </section>
       </Container>
@@ -154,63 +169,71 @@ export default function FinancingPage() {
       <section className="bg-[#111] py-12 text-white sm:py-16">
         <Container>
           <div className="grid gap-8 md:grid-cols-2">
-            <blockquote className="text-lg font-black leading-snug tracking-tight sm:text-2xl">
-              &ldquo;The acquisition of my SUV was handled with what I can only
-              describe as surgical precision.&rdquo;
-              <footer className="mt-5 text-[0.6rem] font-black uppercase tracking-[0.25em] text-white/45">
-                Buyer feedback
-              </footer>
-            </blockquote>
-            <blockquote className="text-lg font-black leading-snug tracking-tight sm:text-2xl">
-              &ldquo;Transparency is rare in this market. O2MackDrive made each step
-              explicit before I committed.&rdquo;
-              <footer className="mt-5 text-[0.6rem] font-black uppercase tracking-[0.25em] text-white/45">
-                Trade-in customer
-              </footer>
-            </blockquote>
+            <Reveal direction="up">
+              <blockquote className="text-lg font-black leading-snug tracking-tight sm:text-2xl">
+                &ldquo;The acquisition of my SUV was handled with what I can only
+                describe as surgical precision.&rdquo;
+                <footer className="mt-5 text-[0.6rem] font-black uppercase tracking-[0.25em] text-white/45">
+                  Buyer feedback
+                </footer>
+              </blockquote>
+            </Reveal>
+            <Reveal direction="up" delay={150}>
+              <blockquote className="text-lg font-black leading-snug tracking-tight sm:text-2xl">
+                &ldquo;Transparency is rare in this market. O2MackDrive made each step
+                explicit before I committed.&rdquo;
+                <footer className="mt-5 text-[0.6rem] font-black uppercase tracking-[0.25em] text-white/45">
+                  Trade-in customer
+                </footer>
+              </blockquote>
+            </Reveal>
           </div>
         </Container>
       </section>
 
       <Container>
-        <section className="grid gap-8 border-b border-black/10 py-12 sm:py-16 lg:grid-cols-[18rem_1fr]">
-          <h2 className="text-2xl font-black tracking-tight text-black">
-            Common Inquiries
-          </h2>
-          <div className="border-t border-black/10">
-            {featuredFaqs.map((faq) => (
-              <details key={faq.question} className="group border-b border-black/10 py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-sm font-black text-black marker:hidden">
-                  {faq.question}
-                  <span className="text-lg font-medium text-black/45 transition group-open:rotate-45">
-                    +
-                  </span>
-                </summary>
-                <p className="mt-3 max-w-2xl text-sm leading-6 text-black/55">
-                  {faq.answer}
-                </p>
-              </details>
-            ))}
-          </div>
-        </section>
+        <Reveal direction="up">
+          <section className="grid gap-8 border-b border-black/10 py-12 sm:py-16 lg:grid-cols-[18rem_1fr]">
+            <h2 className="text-2xl font-black tracking-tight text-black">
+              Common Inquiries
+            </h2>
+            <div className="border-t border-black/10 w-full">
+              {featuredFaqs.map((faq) => (
+                <details key={faq.question} className="group border-b border-black/10 py-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-sm font-black text-black marker:hidden">
+                    {faq.question}
+                    <span className="text-lg font-medium text-black/45 transition group-open:rotate-45">
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-3 max-w-2xl text-sm leading-6 text-black/55">
+                    {faq.answer}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </section>
+        </Reveal>
 
         <section className="py-10 sm:py-14">
-          <div className="bg-[#eceae7] px-6 py-10 text-center sm:px-10 sm:py-14">
-            <h2 className="text-2xl font-black tracking-tight text-black sm:text-3xl">
-              Ready to begin your acquisition?
-            </h2>
-            <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-black/55">
-              Contact our specialists today to discuss your vehicle requirements
-              or start with the financing checklist.
-            </p>
-            <Link
-              href="/contact"
-              className="mt-7 inline-flex bg-black px-7 py-3 text-[0.62rem] font-black uppercase tracking-[0.22em] text-white transition hover:bg-zinc-800"
-              style={{ color: "#ffffff" }}
-            >
-              Inquire Now
-            </Link>
-          </div>
+          <Reveal direction="scale">
+            <div className="bg-[#eceae7] px-6 py-10 text-center sm:px-10 sm:py-14 w-full">
+              <h2 className="text-2xl font-black tracking-tight text-black sm:text-3xl">
+                Ready to begin your acquisition?
+              </h2>
+              <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-black/55">
+                Contact our specialists today to discuss your vehicle requirements
+                or start with the financing checklist.
+              </p>
+              <Link
+                href="/contact"
+                className="mt-7 inline-flex bg-black px-7 py-3 text-[0.62rem] font-black uppercase tracking-[0.22em] text-white transition hover:bg-zinc-800"
+                style={{ color: "#ffffff" }}
+              >
+                Inquire Now
+              </Link>
+            </div>
+          </Reveal>
         </section>
 
         <section className="grid gap-8 border-t border-black/10 py-8 text-xs text-black/45 sm:grid-cols-[1.2fr_1fr_1fr]">
