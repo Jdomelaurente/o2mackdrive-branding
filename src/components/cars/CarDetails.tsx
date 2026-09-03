@@ -26,7 +26,7 @@ export function CarDetails({ car }: CarDetailsProps) {
         ← Back to Inventory
       </Link>
 
-      <div className="mt-6 grid gap-6 sm:mt-8 sm:gap-8 lg:grid-cols-[minmax(0,1.25fr)_420px] lg:items-start">
+      <div className="mt-6 grid gap-6 sm:mt-8 sm:gap-8 lg:grid-cols-[minmax(0,1.25fr)_420px] lg:items-start 2xl:grid-cols-[minmax(0,1.3fr)_450px]">
         <div className="grid gap-6 sm:gap-8">
           <CarGallery car={car} />
 
@@ -93,7 +93,7 @@ export function CarDetails({ car }: CarDetailsProps) {
         </aside>
       </div>
 
-      <div className="mt-8 grid gap-6 sm:mt-10 sm:gap-8 lg:grid-cols-[1fr_420px]">
+      <div className="mt-8 grid gap-6 sm:mt-10 sm:gap-8 lg:grid-cols-[1fr_420px] 2xl:grid-cols-[1fr_450px]">
         <section className="border border-slate-200 bg-white p-5 sm:p-6">
           <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Technical Sheet</p>
           <h2 className="mt-2 text-xl font-black text-slate-950">Vehicle Specs</h2>

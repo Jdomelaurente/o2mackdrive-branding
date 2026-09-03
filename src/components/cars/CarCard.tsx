@@ -23,7 +23,7 @@ export function CarCard({ car }: CarCardProps) {
   };
 
   return (
-    <article className="overflow-hidden border border-slate-200 bg-white transition hover:shadow-lg">
+    <article className="overflow-hidden border border-slate-200 bg-white transition hover:shadow-lg min-w-0">
       <Link href={`/cars/${car.slug}`} className="block" aria-label={`View details for ${title}`}>
         <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
           <Image

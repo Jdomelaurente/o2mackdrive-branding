@@ -28,7 +28,7 @@ export default function ContactPage() {
           </div>
         </Reveal>
 
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start 2xl:grid-cols-[0.8fr_1.2fr] 2xl:gap-14">
           {/* Left: Direct Contact Info */}
           <div className="grid gap-8">
             {/* Contact Card */}

@@ -92,7 +92,7 @@ export function CarFilters({ cars, initialSearch = "" }: CarFiltersProps) {
   const labelClass = "text-[10px] font-black uppercase tracking-wider text-slate-900";
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start text-slate-900">
+    <div className="grid gap-8 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start 2xl:grid-cols-[300px_minmax(0,1fr)] text-slate-900">
       {/* Sidebar Form */}
       <form onSubmit={handleApplyFilters} className="border border-slate-200 bg-white p-5 shadow-sm">
         <div className="border-b border-slate-200 pb-4 mb-5">

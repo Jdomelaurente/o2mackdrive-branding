@@ -97,7 +97,7 @@ export function WhyChooseUs() {
   return (
     <section className="bg-white py-20 text-black sm:py-28">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20">
+        <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20 2xl:gap-28">
           {/* Left Column */}
           <Reveal direction="left">
             <div>

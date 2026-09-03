@@ -61,7 +61,7 @@ export default function FinancingPage() {
   return (
     <main className="-mt-20 bg-[#f7f5f2] pt-28 text-black md:-mt-28 md:pt-36">
       <Container>
-        <section className="grid gap-8 border-b border-black/10 pb-10 lg:grid-cols-[1fr_19rem] lg:items-start">
+        <section className="grid gap-8 border-b border-black/10 pb-10 lg:grid-cols-[1fr_19rem] lg:items-start 2xl:grid-cols-[1fr_22rem]">
           <Reveal direction="left">
             <div>
               <p className="text-[0.62rem] font-black uppercase tracking-[0.28em] text-black/45">
@@ -109,7 +109,7 @@ export default function FinancingPage() {
             />
             <div className="absolute inset-0 flex justify-center items-center pt-30">
               <Image
-                src="/logo-new.png"
+                src="/new-logo(1).png"
                 alt="O2MackDrive logo"
                 width={500}
                 height={180}
@@ -129,7 +129,7 @@ export default function FinancingPage() {
             </h2>
           </Reveal>
 
-          <div className="mt-8 grid gap-4 lg:grid-cols-[1.55fr_0.9fr]">
+          <div className="mt-8 grid gap-4 lg:grid-cols-[1.55fr_0.9fr] 2xl:grid-cols-[1.6fr_0.85fr]">
             {processCards.slice(0, 2).map((service, index) => (
               <Reveal key={service.number} direction="up" delay={index * 100}>
                 <ServiceCard service={service} featured />
@@ -137,7 +137,7 @@ export default function FinancingPage() {
             ))}
           </div>
 
-          <div className="mt-4 grid gap-4 lg:grid-cols-[0.9fr_1fr_0.78fr]">
+          <div className="mt-4 grid gap-4 lg:grid-cols-[0.9fr_1fr_0.78fr] 2xl:grid-cols-[0.85fr_1fr_0.8fr]">
             {processCards.slice(2).map((service, index) => (
               <Reveal key={service.number} direction="up" delay={index * 100}>
                 <ServiceCard service={service} />

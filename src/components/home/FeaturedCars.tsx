@@ -45,7 +45,7 @@ export function FeaturedCars() {
 
             return (
               <Reveal key={car.id} delay={index * 150} direction="up">
-                <article className="flex flex-col group">
+                <article className="flex flex-col group min-w-0">
                   <Link href={`/cars/${car.slug}`} className="block">
                     <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-200">
                       <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-300 flex items-center justify-center">

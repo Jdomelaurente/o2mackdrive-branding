@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-black py-16">
       <Container>
-        <div className="grid gap-10 md:grid-cols-4 lg:gap-16">
+        <div className="grid gap-10 md:grid-cols-4 lg:gap-16 2xl:gap-20">
           <div>
             <Link href="/" className="text-lg font-black tracking-tight text-white">
               O2MackDrive

@@ -44,8 +44,22 @@ export function Hero() {
   const prevImage = () => changeCar("prev");
   const nextImage = () => changeCar("next");
 
+  // Determine slide animation class — only applied during transitions, never during idle
+  const carSlideClass = (() => {
+    if (flipState === "out") return slideDir === "left" ? " animate-car-out-left" : " animate-car-out-right";
+    if (flipState === "in")  return slideDir === "left" ? " animate-car-in-right" : " animate-car-in-left";
+    return "";
+  })();
+
+  // Determine flip animation class for the spec card (matches arrow direction)
+  const cardFlipClass = (() => {
+    if (flipState === "out") return slideDir === "left" ? " animate-flip-out-left"  : " animate-flip-out-right";
+    if (flipState === "in")  return slideDir === "left" ? " animate-flip-in-right"  : " animate-flip-in-left";
+    return "";
+  })();
+
   return (
-    <section className="relative -mt-20 h-[100svh] overflow-hidden bg-[#111] md:-mt-28">
+    <section className="relative -mt-20 min-h-[100svh] overflow-hidden bg-[#111] md:-mt-28">
       {/* Background image — architectural showroom */}
       <Image
         src="/hero-bg.png"
@@ -61,17 +75,17 @@ export function Hero() {
       {/* Top gradient for navbar readability over the bright skylight */}
       <div className="absolute inset-x-0 top-0 z-[2] h-28 bg-gradient-to-b from-black/50 to-transparent" />
 
-      {/* Content layer — uses h-full to fill the section exactly */}
-      <Container className="relative z-10 flex h-[100svh] flex-col justify-between px-6 pb-5 pt-0 md:pt-27">
+      {/* Content layer */}
+      <Container className="relative z-10 flex min-h-[100svh] flex-col justify-between px-6 pb-6 pt-24 md:pt-32">
         {/* ── Top: centered headline ── */}
-        <div className="shrink-0 text-center">
-          <h1 className="mx-auto max-w-3xl text-[clamp(2rem,6vw,3.8rem)] text-black font-black italic leading-[0.92] tracking-[-0.06em] font-display [text-shadow:0_2px_8px_rgba(255,255,255,0.6)] animate-fade-in-up">
+        <div className="shrink-0 text-center animate-fade-in-up">
+          <h1 className="mx-auto max-w-2xl text-[clamp(1.8rem,5.4vw,3.4rem)] text-black font-black italic leading-[0.92] tracking-[-0.06em] font-display [text-shadow:0_2px_8px_rgba(255,255,255,0.6)]">
             Quality Cars.
             <br />
             Smooth Deals.
           </h1>
 
-          <p className="mx-auto mt-3 max-w-md text-xs font-medium leading-relaxed text-slate-300 sm:text-sm animate-fade-in-up delay-100">
+          <p className="mx-auto mt-3 max-w-[400px] text-[0.75rem] font-medium leading-relaxed text-slate-300 sm:text-[0.8rem] animate-fade-in-up delay-100">
             Browse quality used cars in Metro Manila — SUVs, sedans, pickups,
             and more. Straight deals, easy trade-ins, and full document support.
             No pressure. Just your next drive.
@@ -82,47 +96,34 @@ export function Hero() {
         <div className="relative flex min-h-0 flex-1 items-end justify-center pb-8">
           {/* Big watermark text behind the car */}
           <div
-            className="pointer-events-none absolute left-1/2 top-[30%] -translate-x-1/2 -translate-y-1/2 select-none text-[20vw] font-black leading-none tracking-[-0.08em] text-white/[0.05]"
+            className="pointer-events-none absolute left-1/2 top-[30%] -translate-x-1/2 -translate-y-1/2 select-none text-[clamp(9vw,18vw,250px)] font-black leading-none tracking-[-0.08em] text-white/[0.05]"
             aria-hidden="true"
           >
             O2MD
           </div>
 
-          {/* Car image — scaled up significantly to look huge and sit on the floor */}
-          <div
-            className={
-              "relative z-[2] w-full max-w-4xl lg:max-w-[35rem] -mb-5" +
-              (flipState === "idle" ? " animate-fade-in-scale delay-150" : "") +
-              (flipState === "out"
-                ? slideDir === "left"
-                  ? " animate-car-out-left"
-                  : " animate-car-out-right"
-                : "") +
-              (flipState === "in"
-                ? slideDir === "left"
-                  ? " animate-car-in-right"
-                  : " animate-car-in-left"
-                : "")
-            }
-          >
-            <Image
-              key={currentIndex}
-              src={carImages[currentIndex]}
-              alt={title}
-              width={1000}
-              height={600}
-              sizes="(max-width: 768px) 95vw, (max-width: 1200px) 85vw, 1200px"
-              className="mx-auto h-auto max-h-[58vh] w-full object-contain drop-shadow-[0_25px_65px_rgba(0,0,0,0.85)]"
-              fetchPriority="high"
-              loading="eager"
-              priority
-            />
+          {/* Car image — entrance animation only on mount, slide animations on transitions */}
+          <div className="relative z-[2] w-full max-w-3xl lg:max-w-[31.5rem] 2xl:max-w-[38rem] -mb-5 animate-fade-in-scale delay-150">
+            <div className={"w-full h-full" + carSlideClass}>
+              <Image
+                key={currentIndex}
+                src={carImages[currentIndex]}
+                alt={title}
+                width={1000}
+                height={600}
+                sizes="(max-width: 768px) 95vw, (max-width: 1200px) 85vw, 1200px"
+                className="mx-auto h-auto max-h-[52vh] w-full object-contain drop-shadow-[0_25px_65px_rgba(0,0,0,0.85)]"
+                fetchPriority="high"
+                loading="eager"
+                priority
+              />
+            </div>
           </div>
 
           {/* Left Arrow button */}
           <button
             onClick={prevImage}
-            className="absolute left-0 top-12 z-[3] hidden -translate-y-1/2 items-center justify-center rounded-xl border border-white/15 bg-white/5 p-3 text-white/70 backdrop-blur-md transition hover:border-orange-400/50 hover:bg-orange-500/10 hover:text-orange-400 lg:flex"
+            className="absolute left-0 top-12 z-[3] hidden -translate-y-1/2 items-center justify-center rounded-xl border border-white/15 bg-white/5 p-3 text-white/70 backdrop-blur-md transition hover:border-orange-400/50 hover:bg-orange-500/10 hover:text-orange-400 md:flex lg:p-4"
             aria-label="Previous image"
           >
             <svg
@@ -144,7 +145,7 @@ export function Hero() {
           {/* Right Arrow button */}
           <button
             onClick={nextImage}
-            className="absolute right-0 top-12 z-[3] hidden -translate-y-1/2 items-center justify-center rounded-xl border border-white/15 bg-white/5 p-3 text-white/70 backdrop-blur-md transition hover:border-orange-400/50 hover:bg-orange-500/10 hover:text-orange-400 lg:flex"
+            className="absolute right-0 top-12 z-[3] hidden -translate-y-1/2 items-center justify-center rounded-xl border border-white/15 bg-white/5 p-3 text-white/70 backdrop-blur-md transition hover:border-orange-400/50 hover:bg-orange-500/10 hover:text-orange-400 md:flex lg:p-4"
             aria-label="Next image"
           >
             <svg
@@ -163,17 +164,13 @@ export function Hero() {
             </svg>
           </button>
 
-          {/* Featured model spec card — 3D flip wrapper */}
+          {/* Featured model spec card */}
           <div
-            className="absolute bottom-8 right-0 z-[3] hidden lg:block animate-fade-in-up delay-300"
+            className="absolute bottom-8 right-0 z-[3] hidden md:block animate-fade-in-up delay-300"
             style={{ perspective: "800px" }}
           >
             <div
-              className={
-                "border border-white/10 bg-white/95 px-6 py-5 shadow-2xl shadow-black/40 backdrop-blur" +
-                (flipState === "out" ? " animate-flip-out" : "") +
-                (flipState === "in" ? " animate-flip-in" : "")
-              }
+              className={"border border-white/10 bg-white/95 px-6 py-5 shadow-2xl shadow-black/40 backdrop-blur" + cardFlipClass}
               style={{ transformOrigin: "center", backfaceVisibility: "hidden", willChange: "transform, opacity" }}
             >
               <p className="text-[0.55rem] font-bold uppercase tracking-[0.25em] text-slate-500">
@@ -213,7 +210,7 @@ export function Hero() {
 
         {/* ── Bottom: CTA buttons ── */}
         <div className="relative z-[3] flex shrink-0 flex-col items-center gap-2.5 sm:flex-row sm:justify-center animate-fade-in-up delay-200">
-          <Button href="/cars" className="px-7 py-3">
+          <Button href="/cars" className="px-6 py-2.5 text-sm">
             <span className="text-black">Browse Inventory</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -235,7 +232,7 @@ export function Hero() {
           <Button
             href="/sell-trade"
             variant="ghost"
-            className="px-7 py-3"
+            className="px-6 py-2.5 text-sm"
           >
             Our Process
           </Button>

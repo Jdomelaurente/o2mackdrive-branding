@@ -43,7 +43,7 @@ export default function SellTradePage() {
           </div>
         </Reveal>
 
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] items-start">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] items-start 2xl:grid-cols-[0.85fr_1.15fr] 2xl:gap-14">
           {/* Left Column: Benefits */}
           <Reveal direction="left" delay={150}>
             <div className="grid gap-6">

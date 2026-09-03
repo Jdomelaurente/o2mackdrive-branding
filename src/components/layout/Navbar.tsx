@@ -42,11 +42,11 @@ export function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <Container className="flex min-h-16 items-center justify-between px-6 py-4 md:min-h-20 md:py-5">
+      <Container className="flex min-h-16 items-center justify-between gap-4 px-6 py-4 md:min-h-20 md:py-5">
         {/* Brand name */}
         <Link
           href="/"
-          className="text-lg font-black tracking-tight transition hover:opacity-80 sm:text-xl"
+          className="shrink-0 text-lg font-black tracking-tight transition hover:opacity-80 sm:text-xl"
           style={{ color: isScrolledStyle ? "#000000" : "#ffffff" }}
           aria-label="O2MackDrive home"
         >
