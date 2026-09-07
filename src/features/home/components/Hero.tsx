@@ -95,7 +95,7 @@ export function Hero() {
   })();
 
   return (
-    <section className="relative -mt-20 min-h-[100svh] overflow-hidden bg-[#111] md:-mt-28">
+    <section className="relative -mt-20 min-h-[90svh] overflow-hidden bg-[#111] md:-mt-28">
       {/* Background image — architectural showroom */}
       <Image
         src="/screen-4.png"
@@ -112,24 +112,24 @@ export function Hero() {
       <div className="absolute inset-x-0 top-0 z-[2] h-28 bg-gradient-to-b from-black/50 to-transparent" />
 
       {/* Content layer */}
-      <Container className="relative z-10 flex min-h-[100svh] flex-col justify-between px-6 pb-6 pt-32 sm:pt-36 md:pt-40">
+      <Container className="relative z-10 flex min-h-[90svh] flex-col justify-between px-6 pb-2 pt-16 sm:pt-18 md:pt-20">
         {/* ── Top: centered headline ── */}
         <div className="shrink-0 text-center animate-fade-in-up">
-          <h1 className="mx-auto max-w-2xl text-[clamp(1.8rem,5.4vw,3.4rem)] text-black font-black italic leading-[0.92] tracking-[-0.06em] font-display [text-shadow:0_2px_8px_rgba(255,255,255,0.6)]">
+          <h1 className="mx-auto mt-4 max-w-2xl text-[clamp(1.8rem,5.4vw,3.4rem)] text-black font-black italic leading-[0.92] tracking-[-0.06em] font-display [text-shadow:0_2px_8px_rgba(255,255,255,0.6)]">
             Quality Cars.
             <br />
             Smooth Deals.
           </h1>
 
-          <p className="mx-auto mt-3 max-w-[400px] text-[0.75rem] font-medium leading-relaxed text-slate-300 sm:text-[0.8rem] animate-fade-in-up delay-100">
+          <p className="mx-auto mt-1.5 max-w-[400px] text-[0.75rem] font-medium leading-relaxed text-slate-300 sm:text-[0.8rem] animate-fade-in-up delay-100">
             Browse quality used cars in Metro Manila — SUVs, sedans, pickups,
             and more. Straight deals, easy trade-ins, and full document support.
             No pressure. Just your next drive.
           </p>
         </div>
 
-        {/* ── Middle: car showcase (takes remaining space) ── */}
-        <div className="relative flex min-h-0 flex-1 items-end justify-center pb-8">
+        {/* ── Middle: car showcase ── */}
+        <div className="relative flex h-[55vh] max-h-[55vh] shrink-0 items-end justify-center pb-2">
           {/* Big watermark text behind the car */}
           <div
             className="pointer-events-none absolute left-1/2 top-[30%] -translate-x-1/2 -translate-y-1/2 select-none text-[clamp(9vw,18vw,250px)] font-black leading-none tracking-[-0.08em] text-white/[0.05]"
@@ -140,7 +140,7 @@ export function Hero() {
 
           {/* Car image — entrance animation only on mount, slide animations on transitions */}
           <div
-            className="relative z-[2] w-[95%] sm:w-[85%] md:w-[80%] lg:w-full lg:max-w-[45rem] xl:max-w-[55rem] 2xl:max-w-[65rem] -mb-5 animate-fade-in-scale delay-150 select-none"
+            className="relative z-[2] w-full lg:max-w-[52rem] xl:max-w-[65rem] 2xl:max-w-[75rem] -mb-5 animate-fade-in-scale delay-150 select-none"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
             onMouseDown={handleMouseDown}
@@ -157,7 +157,7 @@ export function Hero() {
                 width={1000}
                 height={600}
                 sizes="(max-width: 768px) 95vw, (max-width: 1200px) 85vw, 1200px"
-                className="mx-auto h-auto max-h-[40vh] sm:max-h-[45vh] md:max-h-[50vh] lg:max-h-[60vh] xl:max-h-[65vh] w-full object-contain drop-shadow-[0_25px_65px_rgba(0,0,0,0.85)]"
+                className="mx-auto h-auto max-h-[52vh] w-full object-contain drop-shadow-[0_25px_65px_rgba(0,0,0,0.85)]"
                 fetchPriority="high"
                 loading="eager"
                 priority
@@ -254,7 +254,7 @@ export function Hero() {
         </div>
 
         {/* ── Bottom: CTA buttons ── */}
-        <div className="relative z-[3] flex shrink-0 flex-col items-center gap-2.5 sm:flex-row sm:justify-center animate-fade-in-up delay-200">
+        <div className="relative z-[3] flex shrink-0 flex-col items-center gap-2 pb-2 sm:flex-row sm:justify-center animate-fade-in-up delay-200">
           <Button href="/cars" className="px-6 py-2.5 text-sm">
             <span className="text-black">Browse Inventory</span>
             <svg
