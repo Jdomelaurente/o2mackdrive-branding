@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { SellTradeForm } from "@/components/forms/SellTradeForm";
-import { Container } from "@/components/ui/Container";
-import { Reveal } from "@/components/ui/Reveal";
-import { CarImageUpload } from "@/components/forms/CarImageUpload";
+import { SellTradeForm, CarImageUpload } from "@/features/sell-trade";
+import { Container, Reveal } from "@/shared/components/ui";
 
 export const metadata: Metadata = {
   title: "Sell or Trade Your Car",

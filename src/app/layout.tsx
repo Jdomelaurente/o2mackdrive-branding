@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
-import { Footer } from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
-import { site } from "@/data/site";
+import { Footer, Navbar } from "@/shared/components/layout";
+import { site } from "@/shared/data/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -30,7 +29,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon-64.png",
     shortcut: "/favicon-64.png",
-    apple: "/logo-new.png",
+    apple: "/logo.png",
   },
   openGraph: {
     title: site.businessName,

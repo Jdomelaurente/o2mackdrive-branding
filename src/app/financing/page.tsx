@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Container } from "@/components/ui/Container";
-import { Reveal } from "@/components/ui/Reveal";
-import { faqs } from "@/data/faqs";
-import { site } from "@/data/site";
+import { Container, Reveal } from "@/shared/components/ui";
+import { faqs } from "@/shared/data/faqs";
+import { site } from "@/shared/data/site";
 
 export const metadata: Metadata = {
   title: "Services",

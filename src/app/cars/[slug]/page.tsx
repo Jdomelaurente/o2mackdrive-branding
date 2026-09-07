@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CarDetails } from "@/components/cars/CarDetails";
-import { Container } from "@/components/ui/Container";
-import { cars } from "@/data/cars";
-import { formatPrice } from "@/lib/format";
+import { CarDetails, cars } from "@/features/inventory";
+import { Container } from "@/shared/components/ui";
+import { formatPrice } from "@/shared/lib/format";
 
 type CarPageProps = {
   params: Promise<{ slug: string }>;

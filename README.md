@@ -1,37 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# O2MackDrive Car Trading
+
+Quality Cars. Smooth Deals. Easy Trade-Ins.
+
+A marketing website for O2MackDrive — a Philippine-based car trading business that helps customers buy, sell, and trade quality vehicles.
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **UI:** React 19, TypeScript 5
+- **Styling:** Tailwind CSS v4
+- **Fonts:** Geist Sans, Geist Mono, Montserrat
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/              # Next.js App Router pages
+│   ├── cars/         # Inventory listing + detail pages
+│   ├── contact/      # Contact form
+│   ├── financing/    # Financing info
+│   └── sell-trade/   # Sell/trade form
+├── features/         # Feature modules — everything for one domain lives together
+│   ├── inventory/    # Car inventory (components, data, types, utils)
+│   │   ├── components/   # CarCard, CarDetails, CarFilters, CarGallery, CarGrid, CarSpecs
+│   │   ├── data/         # cars.ts
+│   │   ├── lib/          # filters.ts
+│   │   └── types/        # car.ts
+│   ├── home/         # Homepage sections (Hero, FeaturedCars, Services, FAQ, etc.)
+│   │   └── components/
+│   ├── financing/    # Financing data
+│   │   └── data/
+│   ├── sell-trade/   # Sell/trade form + image upload
+│   │   └── components/
+│   └── contact/      # Contact form
+│       └── components/
+├── shared/           # Code reused across features
+│   ├── components/
+│   │   ├── ui/           # Primitive components (Button, Badge, Container, Reveal, etc.)
+│   │   ├── layout/       # Navbar, Footer, MobileMenu
+│   │   └── forms/        # InquiryForm
+│   ├── data/         # Site-wide static data (site, FAQs, services, testimonials)
+│   ├── lib/          # Utilities (formatting, constants)
+│   └── types/        # Site-wide types (site, inquiry)
+public/
+├── cars/             # Car inventory images
+├── logo.png          # Brand logo
+├── favicon-64.png    # Site icon
+├── hero-bg.png       # Hero background
+└── screen-4.png      # Screenshot
+docs/
+└── project-overview.md  # Full project documentation
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Pages
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Page | Route | Description |
+|------|-------|-------------|
+| Home | `/` | Hero, featured cars, services, how it works, testimonials, FAQs |
+| Cars | `/cars` | Full inventory with filters |
+| Car Detail | `/cars/[slug]` | Individual car specs, gallery, inquiry form |
+| Financing | `/financing` | Loan/lease options and requirements |
+| Sell/Trade | `/sell-trade` | Submit a vehicle for sale or trade |
+| Contact | `/contact` | Contact form, phone, email, Messenger |
 
-## Deploy on Vercel
+## Brand
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Colors:** Black backgrounds, Orange (`#fb923c`) accent, White text
+- **Style:** Dark theme with glassmorphism, mobile-first responsive
+- **Voice:** Direct, confident, garage-culture
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# o2mackdrive-branding
+## License
+
+Private — O2MackDrive
