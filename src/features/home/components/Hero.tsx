@@ -75,7 +75,7 @@ export function Hero() {
       <div className="absolute inset-x-0 top-0 z-[2] h-28 bg-gradient-to-b from-black/50 to-transparent" />
 
       {/* Content layer */}
-      <Container className="relative z-10 flex min-h-[100svh] flex-col justify-between px-6 pb-6 pt-24 md:pt-32">
+      <Container className="relative z-10 flex min-h-[100svh] flex-col justify-between px-6 pb-6 pt-32 sm:pt-36 md:pt-40">
         {/* ── Top: centered headline ── */}
         <div className="shrink-0 text-center animate-fade-in-up">
           <h1 className="mx-auto max-w-2xl text-[clamp(1.8rem,5.4vw,3.4rem)] text-black font-black italic leading-[0.92] tracking-[-0.06em] font-display [text-shadow:0_2px_8px_rgba(255,255,255,0.6)]">
@@ -122,7 +122,7 @@ export function Hero() {
           {/* Left Arrow button */}
           <button
             onClick={prevImage}
-            className="absolute left-0 top-12 z-[3] hidden -translate-y-1/2 items-center justify-center rounded-xl border border-white/15 bg-white/5 p-3 text-white/70 backdrop-blur-md transition hover:border-orange-400/50 hover:bg-orange-500/10 hover:text-orange-400 md:flex lg:p-4"
+            className="absolute left-0 top-1/2 z-[3] flex -translate-y-1/2 items-center justify-center rounded-xl border border-white/15 bg-white/5 p-2 sm:p-3 text-white/70 backdrop-blur-md transition hover:border-orange-400/50 hover:bg-orange-500/10 hover:text-orange-400 lg:p-4"
             aria-label="Previous image"
           >
             <svg
@@ -144,7 +144,7 @@ export function Hero() {
           {/* Right Arrow button */}
           <button
             onClick={nextImage}
-            className="absolute right-0 top-12 z-[3] hidden -translate-y-1/2 items-center justify-center rounded-xl border border-white/15 bg-white/5 p-3 text-white/70 backdrop-blur-md transition hover:border-orange-400/50 hover:bg-orange-500/10 hover:text-orange-400 md:flex lg:p-4"
+            className="absolute right-0 top-1/2 z-[3] flex -translate-y-1/2 items-center justify-center rounded-xl border border-white/15 bg-white/5 p-2 sm:p-3 text-white/70 backdrop-blur-md transition hover:border-orange-400/50 hover:bg-orange-500/10 hover:text-orange-400 lg:p-4"
             aria-label="Next image"
           >
             <svg
