@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function CarsPage() {
   return (
-    <section className="bg-white -mt-20 pt-28 pb-20 text-black min-h-screen md:-mt-28 md:pt-36 sm:pb-42">
+    <section className="bg-white -mt-20 pt-24 pb-16 text-black min-h-[60vh] md:-mt-28 md:pt-28 sm:pb-20">
       <Container>
         <Reveal direction="up">
           <div className="border-b border-slate-200 pb-8">

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="bg-white -mt-20 pt-32 md:-mt-28 md:pt-40 pb-16 text-slate-900 min-h-screen">
+    <section className="bg-white -mt-20 pt-24 md:-mt-28 md:pt-28 pb-16 text-slate-900 min-h-[60vh]">
       <Container>
         {/* Header */}
         <Reveal direction="up">

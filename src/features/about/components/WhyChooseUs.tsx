@@ -94,7 +94,7 @@ const features = [
 
 export function WhyChooseUs() {
   return (
-    <section className="bg-white py-20 text-black sm:py-28">
+    <section className="bg-white pt-24 pb-12 text-black sm:pt-24 sm:pb-16">
       <Container>
         <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20 2xl:gap-28">
           {/* Left Column */}

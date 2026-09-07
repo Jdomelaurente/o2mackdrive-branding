@@ -108,7 +108,7 @@ export default function FinancingPage() {
             />
             <div className="absolute inset-0 flex justify-center items-center pt-30">
               <Image
-                src="/new-logo(1).png"
+                src="/logo(1).png"
                 alt="O2MackDrive logo"
                 width={500}
                 height={180}

@@ -13,7 +13,7 @@ const serviceActions: Record<string, { label: string; href: string }> = {
 
 export function ServicesSection() {
   return (
-    <section className="page-section border-y border-white/10 py-14 text-white sm:py-24 lg:py-28">
+    <section className="page-section border-y border-white/10 py-10 text-white sm:py-16 lg:py-20">
       <div className="section-fade" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
