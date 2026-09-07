@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { Button, Container } from "@/shared/components/ui";
 import { cars } from "@/features/inventory";
@@ -20,6 +20,9 @@ export function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flipState, setFlipState] = useState<FlipState>("idle");
   const [slideDir, setSlideDir] = useState<"left" | "right">("left");
+  const touchStartX = useRef<number | null>(null);
+  const mouseStartX = useRef<number | null>(null);
+  const isDragging = useRef(false);
   const car = sliderCars[currentIndex];
 
   const title = `${car.year} ${car.brand} ${car.model}${
@@ -42,6 +45,40 @@ export function Hero() {
 
   const prevImage = () => changeCar("prev");
   const nextImage = () => changeCar("next");
+
+  // Touch / swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(delta) < 40) return; // ignore tiny taps
+    delta < 0 ? nextImage() : prevImage();
+  };
+
+  // Mouse drag handlers (desktop)
+  const handleMouseDown = (e: React.MouseEvent) => {
+    mouseStartX.current = e.clientX;
+    isDragging.current = false;
+  };
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (mouseStartX.current === null) return;
+    if (Math.abs(e.clientX - mouseStartX.current) > 8) isDragging.current = true;
+  };
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (mouseStartX.current === null) return;
+    const delta = e.clientX - mouseStartX.current;
+    mouseStartX.current = null;
+    if (!isDragging.current || Math.abs(delta) < 40) return;
+    isDragging.current = false;
+    delta < 0 ? nextImage() : prevImage();
+  };
+  const handleMouseLeave = () => {
+    mouseStartX.current = null;
+    isDragging.current = false;
+  };
 
   // Determine slide animation class — only applied during transitions, never during idle
   const carSlideClass = (() => {
@@ -102,7 +139,16 @@ export function Hero() {
           </div>
 
           {/* Car image — entrance animation only on mount, slide animations on transitions */}
-          <div className="relative z-[2] w-[95%] sm:w-[85%] md:w-[80%] lg:w-full lg:max-w-[45rem] xl:max-w-[55rem] 2xl:max-w-[65rem] -mb-5 animate-fade-in-scale delay-150">
+          <div
+            className="relative z-[2] w-[95%] sm:w-[85%] md:w-[80%] lg:w-full lg:max-w-[45rem] xl:max-w-[55rem] 2xl:max-w-[65rem] -mb-5 animate-fade-in-scale delay-150 select-none"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
+            style={{ touchAction: "pan-y", cursor: isDragging.current ? "grabbing" : "grab" }}
+          >
             <div className={"w-full h-full" + carSlideClass}>
               <Image
                 key={currentIndex}
@@ -165,41 +211,41 @@ export function Hero() {
 
           {/* Featured model spec card */}
           <div
-            className="absolute bottom-8 right-0 z-[3] hidden md:block animate-fade-in-up delay-300"
+            className="absolute bottom-0 right-14 z-[3] hidden md:block animate-fade-in-up delay-300"
             style={{ perspective: "800px" }}
           >
             <div
-              className={"border border-white/10 bg-white/95 px-6 py-5 shadow-2xl shadow-black/40 backdrop-blur" + cardFlipClass}
+              className={"border border-white/10 bg-white/95 px-4 py-3.5 shadow-2xl shadow-black/40 backdrop-blur" + cardFlipClass}
               style={{ transformOrigin: "center", backfaceVisibility: "hidden", willChange: "transform, opacity" }}
             >
-              <p className="text-[0.55rem] font-bold uppercase tracking-[0.25em] text-slate-500">
+              <p className="text-[0.5rem] font-bold uppercase tracking-[0.25em] text-slate-500">
                 Featured Model
               </p>
 
-              <p className="mt-1 text-xl font-black tracking-tight text-slate-950">
+              <p className="mt-0.5 text-base font-black tracking-tight text-slate-950">
                 {car.brand} {car.model}{car.variant ? ` ${car.variant}` : ""}
               </p>
 
-              <p className="mt-0.5 text-[0.55rem] uppercase tracking-[0.2em] text-slate-400">
+              <p className="mt-0.5 text-[0.5rem] uppercase tracking-[0.2em] text-slate-400">
                 {car.bodyType} · {car.color}
               </p>
 
-              <div className="mt-2.5 border-t border-slate-200 pt-2.5">
-                <p className="text-[0.5rem] font-bold uppercase tracking-[0.25em] text-slate-400">
+              <div className="mt-2 border-t border-slate-200 pt-2">
+                <p className="text-[0.45rem] font-bold uppercase tracking-[0.25em] text-slate-400">
                   Mileage&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price
                 </p>
 
-                <div className="mt-1 flex items-baseline gap-6">
-                  <span className="text-base font-black text-slate-900">
+                <div className="mt-0.5 flex items-baseline gap-4">
+                  <span className="text-sm font-black text-slate-900">
                     {car.mileage.toLocaleString("en-PH")} km
                   </span>
 
-                  <span className="text-base font-black text-slate-900">
+                  <span className="text-sm font-black text-slate-900">
                     {formatPrice(car.price)}
                   </span>
                 </div>
 
-                <p className="mt-1.5 text-[0.5rem] uppercase tracking-[0.2em] text-slate-400">
+                <p className="mt-1 text-[0.45rem] uppercase tracking-[0.2em] text-slate-400">
                   {car.transmission} · {car.fuelType}
                 </p>
               </div>

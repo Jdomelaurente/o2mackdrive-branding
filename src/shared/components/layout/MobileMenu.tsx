@@ -54,7 +54,7 @@ export function MobileMenu({ links, ctaLabel }: MobileMenuProps) {
               </Link>
             ))}
           </nav>
-          <Button href="/contact" className="mt-4 w-full animate-fade-in-up delay-300" onClick={() => setOpen(false)}>
+          <Button href="/contact" className="mt-4 w-full animate-fade-in-up delay-300 !text-slate-950" onClick={() => setOpen(false)}>
             {ctaLabel}
           </Button>
         </div>
