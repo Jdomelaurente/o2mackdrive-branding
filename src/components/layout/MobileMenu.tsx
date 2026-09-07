@@ -32,7 +32,7 @@ export function MobileMenu({ links, ctaLabel }: MobileMenuProps) {
       </button>
 
       {open ? (
-        <div className="absolute right-0 top-[calc(100%+0.75rem)] w-[min(calc(100vw-1.5rem),22rem)] rounded-2xl border border-white/10 bg-black/95 p-4 shadow-2xl shadow-black/40 backdrop-blur">
+        <div className="absolute right-0 top-[calc(100%+0.75rem)] w-[min(calc(100vw-1.5rem),22rem)] rounded-2xl border border-white/10 bg-black/95 p-4 shadow-2xl shadow-black/40 backdrop-blur animate-slide-down">
           <Link
             href="/"
             className="mb-4 flex w-fit items-center"
@@ -43,18 +43,19 @@ export function MobileMenu({ links, ctaLabel }: MobileMenuProps) {
           </Link>
 
           <nav aria-label="Mobile navigation" className="grid gap-2">
-            {links.map((link) => (
+            {links.map((link, i) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-xl px-4 py-3 text-sm font-bold text-slate-200 hover:bg-white/10 hover:text-white"
+                style={{ animationDelay: `${i * 40 + 60}ms` }}
+                className="animate-fade-in-up rounded-xl px-4 py-3 text-sm font-bold text-slate-200 hover:bg-white/10 hover:text-white"
                 onClick={() => setOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
           </nav>
-          <Button href="/contact" className="mt-4 w-full" onClick={() => setOpen(false)}>
+          <Button href="/contact" className="mt-4 w-full animate-fade-in-up delay-300" onClick={() => setOpen(false)}>
             {ctaLabel}
           </Button>
         </div>

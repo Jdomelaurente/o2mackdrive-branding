@@ -62,11 +62,11 @@ export function Hero() {
     <section className="relative -mt-20 min-h-[100svh] overflow-hidden bg-[#111] md:-mt-28">
       {/* Background image — architectural showroom */}
       <Image
-        src="/hero-bg.png"
+        src="/screen-4.png"
         alt="Showroom background"
         fill
         sizes="100vw"
-        className="z-[1] object-cover object-center brightness-[1.5] contrast-[1.1]"
+        className="z-[1] object-cover object-center brightness-[1.15] contrast-[1.05]"
         fetchPriority="high"
         loading="eager"
         priority
@@ -99,7 +99,7 @@ export function Hero() {
             className="pointer-events-none absolute left-1/2 top-[30%] -translate-x-1/2 -translate-y-1/2 select-none text-[clamp(9vw,18vw,250px)] font-black leading-none tracking-[-0.08em] text-white/[0.05]"
             aria-hidden="true"
           >
-            O2MD
+           
           </div>
 
           {/* Car image — entrance animation only on mount, slide animations on transitions */}

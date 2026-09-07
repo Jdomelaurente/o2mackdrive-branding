@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Hanken_Grotesk } from "next/font/google";
+import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { site } from "@/data/site";
@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const hankenGrotesk = Hanken_Grotesk({
-  variable: "--font-hanken-grotesk",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
 });
 
@@ -46,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${geistSans.variable} ${geistMono.variable} ${hankenGrotesk.variable} antialiased`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} antialiased`}>
       <body>
         <Navbar />
         <main className="pt-20 md:pt-28">{children}</main>
