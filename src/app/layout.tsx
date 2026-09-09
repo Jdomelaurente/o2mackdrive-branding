@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import { Footer, Navbar } from "@/shared/components/layout";
+import { CookieConsent } from "@/shared/components/ui";
 import { site } from "@/shared/data/site";
 import "./globals.css";
 
@@ -50,6 +51,7 @@ export default function RootLayout({
         <Navbar />
         <main className="pt-20 md:pt-28">{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );
