@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { NavigationLink } from "@/shared/types/site";
 import { Button, BrandLogo } from "@/shared/components/ui";
 
@@ -12,10 +12,75 @@ type MobileMenuProps = {
 
 export function MobileMenu({ links, ctaLabel }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const close = useCallback(() => setOpen(false), []);
+
+  // Close on Escape key
+  useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        close();
+        buttonRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open, close]);
+
+  // Close on click outside
+  useEffect(() => {
+    if (!open) return;
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        close();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open, close]);
+
+  // Focus trap
+  useEffect(() => {
+    if (!open || !menuRef.current) return;
+
+    const focusableElements = menuRef.current.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement?.focus();
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement?.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleTab);
+    firstElement?.focus();
+    return () => document.removeEventListener("keydown", handleTab);
+  }, [open]);
 
   return (
-    <div className="shrink-0 md:hidden">
+    <div className="shrink-0 md:hidden" ref={menuRef}>
       <button
+        ref={buttonRef}
         type="button"
         className="inline-flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-2xl border border-white/15 bg-black/75 text-white shadow-xl shadow-black/35 backdrop-blur transition hover:border-orange-300/50 hover:bg-black/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-300"
         aria-label={open ? "Close mobile navigation" : "Open mobile navigation"}
@@ -36,7 +101,7 @@ export function MobileMenu({ links, ctaLabel }: MobileMenuProps) {
             href="/"
             className="mb-4 flex w-fit items-center"
             aria-label="O2MackDrive home"
-            onClick={() => setOpen(false)}
+            onClick={close}
           >
             <BrandLogo size="sm" variant="wide" className="h-8 w-36" />
           </Link>
@@ -48,13 +113,13 @@ export function MobileMenu({ links, ctaLabel }: MobileMenuProps) {
                 href={link.href}
                 style={{ animationDelay: `${i * 40 + 60}ms` }}
                 className="animate-fade-in-up rounded-xl px-4 py-3 text-sm font-bold text-slate-200 hover:bg-white/10 hover:text-white"
-                onClick={() => setOpen(false)}
+                onClick={close}
               >
                 {link.label}
               </Link>
             ))}
           </nav>
-          <Button href="/contact" className="mt-4 w-full animate-fade-in-up delay-300 !text-slate-950" onClick={() => setOpen(false)}>
+          <Button href="/contact" className="mt-4 w-full animate-fade-in-up delay-300 !text-slate-950" onClick={close}>
             {ctaLabel}
           </Button>
         </div>

@@ -32,7 +32,7 @@ export function CarCard({ car }: CarCardProps) {
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
             className="object-cover transition duration-500 hover:scale-105"
-            loading="eager"
+            loading="lazy"
           />
           <div className="absolute left-3 top-3">
             <span className={`inline-block px-2.5 py-1 text-[9px] font-black uppercase tracking-wider ${statusColorMap[car.status]}`}>

@@ -1,20 +1,26 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 
 const STORAGE_KEY = "o2mackdrive-cookie-consent";
 
-export function CookieConsent() {
-  const [visible, setVisible] = useState(false);
+const subscribe = (onChange: () => void) => {
+  window.addEventListener("storage", onChange);
+  return () => window.removeEventListener("storage", onChange);
+};
 
-  useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) setVisible(true);
-  }, []);
+const getSnapshot = () => window.localStorage.getItem(STORAGE_KEY);
+const getServerSnapshot = () => null;
+
+export function CookieConsent() {
+  const stored = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const visible = stored === null;
 
   const handleChoice = useCallback((consented: boolean) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ consented, timestamp: Date.now() }));
-    setVisible(false);
+    window.localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ consented, timestamp: Date.now() })
+    );
   }, []);
 
   if (!visible) return null;

@@ -15,7 +15,6 @@ export const site: SiteInfo = {
     { label: "Cars", href: "/cars" },
     { label: "Sell/Trade", href: "/sell-trade" },
     { label: "Financing", href: "/financing" },
-    { label: "Contact", href: "/contact" },
   ],
   primaryCtaLabel: "Inquire Now",
 };

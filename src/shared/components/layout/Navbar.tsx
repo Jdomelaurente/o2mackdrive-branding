@@ -5,14 +5,9 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Container } from "@/shared/components/ui";
 import { MobileMenu } from "@/shared/components/layout/MobileMenu";
+import { site } from "@/shared/data/site";
 
-const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Inventory", href: "/cars" },
-  { label: "Sell/Trade", href: "/sell-trade" },
-  { label: "Services", href: "/financing" },
-  { label: "About", href: "/contact" },
-];
+const navLinks = site.navigation;
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -20,7 +15,10 @@ export function Navbar() {
 
   // Pages with white backgrounds should always have the white/black navbar style
   const isLightPage = pathname === "/sell-trade" || pathname === "/financing" || pathname === "/contact" || pathname.startsWith("/cars");
+  // Pages with light backgrounds that start transparent, then turn white on scroll
+  const isDarkTextPage = pathname.startsWith("/privacy") || pathname.startsWith("/terms");
   const isScrolledStyle = scrolled || isLightPage;
+  const textColor = isScrolledStyle ? "#000000" : "#ffffff";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,7 +37,9 @@ export function Navbar() {
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         isScrolledStyle
           ? "bg-white/80 shadow-sm backdrop-blur-md"
-          : "bg-transparent"
+          : isDarkTextPage
+            ? "bg-black"
+            : "bg-transparent"
       }`}
     >
       <Container className="flex min-h-16 items-center justify-between gap-4 px-6 py-4 md:min-h-20 md:py-5">
@@ -47,7 +47,7 @@ export function Navbar() {
         <Link
           href="/"
           className="shrink-0 text-lg font-black tracking-tight transition hover:opacity-80 sm:text-xl"
-          style={{ color: isScrolledStyle ? "#000000" : "#ffffff" }}
+          style={{ color: textColor }}
           aria-label="O2MackDrive home"
         >
           O2MackDrive
@@ -63,7 +63,7 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               className="px-4 py-2 text-[13px] font-semibold transition hover:text-orange-500"
-              style={{ color: isScrolledStyle ? "#000000" : "#ffffffff" }}
+              style={{ color: textColor }}
             >
               {link.label}
             </Link>

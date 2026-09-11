@@ -119,6 +119,7 @@ export function SellTradeForm() {
           </div>
 
           <button
+            type="button"
             onClick={handleNext}
             className="w-fit bg-black text-white hover:bg-slate-900 uppercase font-black py-3 px-6 text-[10px] tracking-widest transition cursor-pointer mt-2"
           >
@@ -157,12 +158,14 @@ export function SellTradeForm() {
 
           <div className="flex gap-3 mt-2">
             <button
+              type="button"
               onClick={handleBack}
               className="border border-slate-200 text-slate-700 hover:bg-slate-50 uppercase font-bold py-3 px-6 text-[10px] tracking-widest transition cursor-pointer"
             >
               Back
             </button>
             <button
+              type="button"
               onClick={handleNext}
               className="bg-black text-white hover:bg-slate-900 uppercase font-black py-3 px-6 text-[10px] tracking-widest transition cursor-pointer"
             >
@@ -203,6 +206,7 @@ export function SellTradeForm() {
 
           <div className="flex gap-3 mt-2">
             <button
+              type="button"
               onClick={handleBack}
               className="border border-slate-200 text-slate-700 hover:bg-slate-50 uppercase font-bold py-3 px-6 text-[10px] tracking-widest transition cursor-pointer"
             >

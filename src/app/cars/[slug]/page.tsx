@@ -29,6 +29,11 @@ export async function generateMetadata({ params }: CarPageProps): Promise<Metada
   return {
     title,
     description: `${title} for ${formatPrice(car.price)}. View mileage, specs, features, and inquiry options from O2MackDrive Car Trading.`,
+    openGraph: {
+      title,
+      description: `${title} for ${formatPrice(car.price)}. View mileage, specs, features, and inquiry options from O2MackDrive Car Trading.`,
+      images: [car.images[0]],
+    },
   };
 }
 
@@ -40,9 +45,49 @@ export default async function CarDetailPage({ params }: CarPageProps) {
     notFound();
   }
 
+  const title = `${car.year} ${car.brand} ${car.model}${car.variant ? ` ${car.variant}` : ""}`;
+
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: title,
+    description: car.description,
+    image: car.images,
+    brand: {
+      "@type": "Brand",
+      name: car.brand,
+    },
+    offers: {
+      "@type": "Offer",
+      price: car.price,
+      priceCurrency: "PHP",
+      availability: car.status === "Available" ? "https://schema.org/InStock" : "https://schema.org/SoldOut",
+      itemCondition: "https://schema.org/UsedCondition",
+    },
+    vehicleSpecification: {
+      "@type": "Vehicle",
+      mileageFromOdometer: {
+        "@type": "QuantitativeValue",
+        value: car.mileage,
+        unitCode: "KMT",
+      },
+      vehicleTransmission: car.transmission,
+      fuelType: car.fuelType,
+      bodyType: car.bodyType,
+      modelDate: car.year,
+      color: car.color,
+    },
+  };
+
   return (
-    <Container>
-      <CarDetails car={car} />
-    </Container>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+      <Container>
+        <CarDetails car={car} />
+      </Container>
+    </>
   );
 }

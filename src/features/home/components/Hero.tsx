@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { Button, Container } from "@/shared/components/ui";
 import { cars } from "@/features/inventory";
@@ -22,26 +22,39 @@ export function Hero() {
   const [slideDir, setSlideDir] = useState<"left" | "right">("left");
   const touchStartX = useRef<number | null>(null);
   const mouseStartX = useRef<number | null>(null);
-  const isDragging = useRef(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
   const car = sliderCars[currentIndex];
 
   const title = `${car.year} ${car.brand} ${car.model}${
     car.variant ? ` ${car.variant}` : ""
   }`;
 
-  const changeCar = (direction: "prev" | "next") => {
+  // Clean up timeouts on unmount
+  useEffect(() => {
+    const currentTimeouts = timeoutsRef.current;
+    return () => {
+      currentTimeouts.forEach(clearTimeout);
+    };
+  }, []);
+
+  const changeCar = useCallback((direction: "prev" | "next") => {
     if (flipState !== "idle") return;
     setSlideDir(direction === "next" ? "left" : "right");
     setFlipState("out");
-    setTimeout(() => {
+
+    const t1 = setTimeout(() => {
       setCurrentIndex((i) => {
         if (direction === "prev") return i === 0 ? sliderCars.length - 1 : i - 1;
         return i === sliderCars.length - 1 ? 0 : i + 1;
       });
       setFlipState("in");
     }, 220);
-    setTimeout(() => setFlipState("idle"), 520);
-  };
+
+    const t2 = setTimeout(() => setFlipState("idle"), 520);
+
+    timeoutsRef.current.push(t1, t2);
+  }, [flipState]);
 
   const prevImage = () => changeCar("prev");
   const nextImage = () => changeCar("next");
@@ -55,29 +68,31 @@ export function Hero() {
     const delta = e.changedTouches[0].clientX - touchStartX.current;
     touchStartX.current = null;
     if (Math.abs(delta) < 40) return; // ignore tiny taps
-    delta < 0 ? nextImage() : prevImage();
+    if (delta < 0) nextImage();
+    else prevImage();
   };
 
   // Mouse drag handlers (desktop)
   const handleMouseDown = (e: React.MouseEvent) => {
     mouseStartX.current = e.clientX;
-    isDragging.current = false;
+    setIsDragging(false);
   };
   const handleMouseMove = (e: React.MouseEvent) => {
     if (mouseStartX.current === null) return;
-    if (Math.abs(e.clientX - mouseStartX.current) > 8) isDragging.current = true;
+    if (Math.abs(e.clientX - mouseStartX.current) > 8) setIsDragging(true);
   };
   const handleMouseUp = (e: React.MouseEvent) => {
     if (mouseStartX.current === null) return;
     const delta = e.clientX - mouseStartX.current;
     mouseStartX.current = null;
-    if (!isDragging.current || Math.abs(delta) < 40) return;
-    isDragging.current = false;
-    delta < 0 ? nextImage() : prevImage();
+    if (!isDragging || Math.abs(delta) < 40) return;
+    setIsDragging(false);
+    if (delta < 0) nextImage();
+    else prevImage();
   };
   const handleMouseLeave = () => {
     mouseStartX.current = null;
-    isDragging.current = false;
+    setIsDragging(false);
   };
 
   // Determine slide animation class — only applied during transitions, never during idle
@@ -135,7 +150,7 @@ export function Hero() {
             className="pointer-events-none absolute left-1/2 top-[30%] -translate-x-1/2 -translate-y-1/2 select-none text-[clamp(9vw,18vw,250px)] font-black leading-none tracking-[-0.08em] text-white/[0.05]"
             aria-hidden="true"
           >
-           
+            O2MackDrive
           </div>
 
           {/* Car image — entrance animation only on mount, slide animations on transitions */}
@@ -147,7 +162,7 @@ export function Hero() {
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseLeave}
-            style={{ touchAction: "pan-y", cursor: isDragging.current ? "grabbing" : "grab" }}
+            style={{ touchAction: "pan-y", cursor: isDragging ? "grabbing" : "grab" }}
           >
             <div className={"w-full h-full" + carSlideClass}>
               <Image

@@ -6,9 +6,9 @@ import { faqs } from "@/shared/data/faqs";
 import { site } from "@/shared/data/site";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Financing",
   description:
-    "O2MackDrive services: financing assistance, document support, vehicle viewing, and trade-in guidance for Metro Manila car buyers.",
+    "O2MackDrive financing assistance: document support, vehicle viewing, and trade-in guidance for Metro Manila car buyers.",
 };
 
 const processCards = [
@@ -250,6 +250,12 @@ export default function FinancingPage() {
               </Link>
               <Link href="/sell-trade" className="hover:text-black">
                 Sell or Trade
+              </Link>
+              <Link href="/services" className="hover:text-black">
+                Services
+              </Link>
+              <Link href="/about" className="hover:text-black">
+                About
               </Link>
               <Link href="/contact" className="hover:text-black">
                 Contact
