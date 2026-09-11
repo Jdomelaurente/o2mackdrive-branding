@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
-import { Container } from "@/shared/components/ui";
+import { Container } from "@/components/ui/Container";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -41,7 +41,7 @@ export default function GlobalNotFound() {
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
-                href="/"
+                href="/home"
                 className="inline-flex min-h-11 items-center justify-center bg-black px-6 py-2.5 text-sm font-bold text-white transition hover:bg-slate-800"
               >
                 Back to Home

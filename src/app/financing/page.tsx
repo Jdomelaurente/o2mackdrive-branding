@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Container, Reveal } from "@/shared/components/ui";
-import { faqs } from "@/shared/data/faqs";
-import { site } from "@/shared/data/site";
+import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
+import { faqs } from "@/data/faqs";
+import { site } from "@/data/site";
+import { financing } from "@/data/financing";
 
 export const metadata: Metadata = {
   title: "Financing",
@@ -165,26 +167,39 @@ export default function FinancingPage() {
         </section>
       </Container>
 
-      <section className="bg-[#111] py-12 text-white sm:py-16">
+<section className="bg-[#111] py-12 text-white sm:py-16">
         <Container>
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-[1.2fr_1fr]">
             <Reveal direction="up">
-              <blockquote className="text-lg font-black leading-snug tracking-tight sm:text-2xl">
-                &ldquo;The acquisition of my SUV was handled with what I can only
-                describe as surgical precision.&rdquo;
-                <footer className="mt-5 text-[0.6rem] font-black uppercase tracking-[0.25em] text-white/45">
-                  Buyer feedback
-                </footer>
-              </blockquote>
+              <div>
+                <p className="text-[0.6rem] font-black uppercase tracking-[0.24em] text-white/40">
+                  Financing guidance
+                </p>
+                <h2 className="mt-3 text-2xl font-black tracking-tight sm:text-3xl">
+                  We help you prepare. Approval is the bank&rsquo;s decision.
+                </h2>
+                <p className="mt-4 max-w-xl text-sm leading-6 text-white/60">
+                  {financing.explanation} {financing.disclaimer}
+                </p>
+              </div>
             </Reveal>
             <Reveal direction="up" delay={150}>
-              <blockquote className="text-lg font-black leading-snug tracking-tight sm:text-2xl">
-                &ldquo;Transparency is rare in this market. O2MackDrive made each step
-                explicit before I committed.&rdquo;
-                <footer className="mt-5 text-[0.6rem] font-black uppercase tracking-[0.25em] text-white/45">
-                  Trade-in customer
-                </footer>
-              </blockquote>
+              <div className="border border-white/15 p-6">
+                <p className="text-[0.6rem] font-black uppercase tracking-[0.24em] text-white/40">
+                  Common requirements
+                </p>
+                <ul className="mt-4 grid gap-2.5">
+                  {financing.requirements.map((requirement) => (
+                    <li
+                      key={requirement}
+                      className="flex items-start gap-2 text-sm leading-snug text-white/70"
+                    >
+                      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-300" />
+                      {requirement}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </Reveal>
           </div>
         </Container>
@@ -250,12 +265,6 @@ export default function FinancingPage() {
               </Link>
               <Link href="/sell-trade" className="hover:text-black">
                 Sell or Trade
-              </Link>
-              <Link href="/services" className="hover:text-black">
-                Services
-              </Link>
-              <Link href="/about" className="hover:text-black">
-                About
               </Link>
               <Link href="/contact" className="hover:text-black">
                 Contact

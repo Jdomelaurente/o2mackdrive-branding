@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Container, Reveal } from "@/shared/components/ui";
+import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -24,33 +25,52 @@ export default function PrivacyPage() {
 
           <Reveal direction="up" delay={100}>
             <div className="mt-10 space-y-8 text-sm leading-7 text-black/70">
-              <section>
+<section>
                 <h2 className="text-lg font-black text-black">Information We Collect</h2>
                 <p className="mt-3">
-                  When you visit our website, we may collect certain information automatically,
-                  including your IP address, browser type, operating system, and browsing activity
-                  on our site. We may also collect personal information you voluntarily provide,
-                  such as your name, email address, and phone number when you submit an inquiry
-                  or contact form.
+                  O2MackDrive practices data minimization. We do not run analytics,
+                  tracking pixels, or advertising tools on this website, and we do not
+                  collect browsing profiles about you.
+                </p>
+                <p className="mt-3">
+                  When you submit an inquiry or sell/trade form, we collect only the
+                  details needed to respond and assist you: your name, contact number,
+                  and the message or vehicle information you provide. An email address
+                  is requested only on our contact form and is used exclusively to reply
+                  to your inquiry.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-lg font-black text-black">How We Use Your Information</h2>
                 <p className="mt-3">
-                  We use the information we collect to respond to your inquiries, provide customer
-                  support, improve our website and services, and send you relevant updates about
-                  our car inventory and promotions (with your consent).
+                  We use the information you provide solely to respond to your inquiry,
+                  prepare a valuation or trade-in discussion, and coordinate your request
+                  with you directly. We do not send unsolicited marketing messages, and
+                  we do not use your details for promotions without your separate
+                  consent.
                 </p>
               </section>
 
               <section>
-                <h2 className="text-lg font-black text-black">Cookies</h2>
+                <h2 className="text-lg font-black text-black">Storage &amp; Retention</h2>
                 <p className="mt-3">
-                  Our website uses cookies to enhance your browsing experience. Cookies are small
-                  text files stored on your device that help us understand how you use our site.
-                  You can control cookie settings through your browser preferences. By continuing
-                  to use our site, you consent to our use of cookies as described in this policy.
+                  We keep the information you submit only as long as needed to complete
+                  the transaction you requested or as required by Philippine law. Details
+                  you provide are handled confidentially and are accessible only to our
+                  team for the purpose of responding to you.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-lg font-black text-black">Cookies &amp; Local Storage</h2>
+                <p className="mt-3">
+                  We do not use third-party tracking cookies. We may store a small
+                  preference in your browser&rsquo;s local storage to remember your cookie
+                  choice. For details, please read our{" "}
+                  <Link href="/cookie-policy" className="font-bold text-black underline underline-offset-2 hover:text-black/70">
+                    Cookie Policy
+                  </Link>.
                 </p>
               </section>
 

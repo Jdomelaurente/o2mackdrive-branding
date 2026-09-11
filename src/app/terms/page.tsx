@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Container, Reveal } from "@/shared/components/ui";
+import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -62,6 +63,19 @@ export default function TermsPage() {
                   When you submit an inquiry form or contact us, you agree that the information
                   provided is accurate and truthful. We will use your contact information solely
                   to respond to your inquiry and provide relevant assistance regarding our services.
+                </p>
+              </section>
+
+<section>
+                <h2 className="text-lg font-black text-black">Vehicle Transactions &amp; Payments</h2>
+                <p className="mt-3">
+                  All vehicles are sold on an &ldquo;as is, where is&rdquo; basis, subject
+                  to written agreement with our team. We encourage full inspection and
+                  verification before payment. Reservation deposits and completed sales
+                  are governed by our{" "}
+                  <Link href="/refund-policy" className="font-bold text-black underline underline-offset-2 hover:text-black/70">
+                    Refund Policy
+                  </Link>.
                 </p>
               </section>
 

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { CarFilters, cars } from "@/features/inventory";
-import { Container, Reveal } from "@/shared/components/ui";
+import { CarFilters } from "@/components/cars/CarFilters";
+import { cars } from "@/data/cars";
+import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "Car Inventory",

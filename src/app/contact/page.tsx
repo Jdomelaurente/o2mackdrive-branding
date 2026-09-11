@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ContactForm } from "@/features/contact";
-import { Container, Reveal } from "@/shared/components/ui";
-import { site } from "@/shared/data/site";
+import { ContactForm } from "@/components/forms/ContactForm";
+import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
+import { site } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Contact",

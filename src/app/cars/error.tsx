@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import { Container } from "@/shared/components/ui";
+import { Container } from "@/components/ui/Container";
 
 export default function CarsError({
   error,
@@ -37,7 +37,7 @@ export default function CarsError({
             Try Again
           </button>
           <Link
-            href="/"
+            href="/home"
             className="inline-flex min-h-11 items-center justify-center border border-black/15 px-6 py-2.5 text-sm font-bold text-black transition hover:border-black hover:bg-white"
           >
             Back to Home

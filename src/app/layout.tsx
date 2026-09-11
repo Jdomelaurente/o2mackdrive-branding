@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
-import { Footer, Navbar } from "@/shared/components/layout";
-import { CookieConsent } from "@/shared/components/ui";
-import { site } from "@/shared/data/site";
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { CookieConsent } from "@/components/layout/CookieConsent";
+import { site } from "@/data/site";
 import "./globals.css";
 
 const geistSans = Geist({

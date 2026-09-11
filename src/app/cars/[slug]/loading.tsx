@@ -1,4 +1,4 @@
-import { Container } from "@/shared/components/ui";
+import { Container } from "@/components/ui/Container";
 
 export default function CarDetailLoading() {
   return (
