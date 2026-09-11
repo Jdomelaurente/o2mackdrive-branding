@@ -61,13 +61,15 @@ export function CookieConsent() {
 
         <p id="cookie-consent-text" className="mt-3 text-sm leading-relaxed text-slate-300">
           We do not use tracking or advertising cookies. We only store a small
-          preference on your device to remember this choice.{" "}
+          preference on your device to remember this choice. Read our{" "}
           <Link href="/cookie-policy" className="font-bold text-orange-300 underline underline-offset-4 decoration-orange-300 transition-colors hover:text-orange-200">
             Cookie Policy
           </Link>{" "}
+          and{" "}
           <Link href="/privacy" className="font-bold text-orange-300 underline underline-offset-4 decoration-orange-300 transition-colors hover:text-orange-200">
             Privacy Policy
           </Link>
+          .
         </p>
 
         <div className="mt-5 flex flex-wrap gap-3">
