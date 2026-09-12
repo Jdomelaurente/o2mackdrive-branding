@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { AdminSidebar } from "@/components/admin/AdminSidebar";
+import { DeskLayoutShell } from "@/components/admin/DeskLayoutShell";
 
 export default function DeskLayout({
   children,
@@ -7,13 +7,10 @@ export default function DeskLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="min-h-screen bg-[#f7f5f2]">
-      <AdminSidebar />
-      <div className="px-5 py-8 sm:px-8 sm:py-10 lg:ml-60 lg:px-12 lg:py-12">
-        <Suspense fallback={null}>
-          <main className="mx-auto max-w-6xl">{children}</main>
-        </Suspense>
-      </div>
-    </div>
+    <DeskLayoutShell>
+      <Suspense fallback={null}>
+        <main className="mx-auto max-w-6xl">{children}</main>
+      </Suspense>
+    </DeskLayoutShell>
   );
 }
