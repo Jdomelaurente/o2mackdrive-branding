@@ -8,7 +8,7 @@ export const selectClass = inputClass;
 export const btnPrimary =
   "inline-flex items-center justify-center gap-2 bg-black px-6 py-3 text-[10px] font-black uppercase tracking-widest text-white transition hover:bg-slate-900 disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer";
 export const btnOutline =
-  "inline-flex items-center justify-center gap-2 border border-slate-200 bg-white px-6 py-3 text-[10px] font-bold uppercase tracking-widest text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer";
+  "inline-flex items-center justify-center gap-2 border border-slate-200 bg-white px-6 py-3 text-[10px] font-bold uppercase tracking-widest !text-black transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer";
 export const btnDanger =
   "inline-flex items-center justify-center gap-2 border border-red-200 bg-white px-6 py-3 text-[10px] font-bold uppercase tracking-widest text-red-600 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer";
 

@@ -3,11 +3,18 @@ import { safeEqual, sessionCookieOptions, SESSION_COOKIE, signSession } from "@/
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => ({}));
+  const username = typeof body.username === "string" ? body.username : "";
   const password = typeof body.password === "string" ? body.password : "";
-  const expected = process.env.ADMIN_PASSWORD ?? "";
+  const expectedUsername = process.env.ADMIN_USERNAME ?? "";
+  const expectedPassword = process.env.ADMIN_PASSWORD ?? "";
 
-  if (!expected || !password || !safeEqual(password, expected)) {
-    return NextResponse.json({ error: "Invalid password" }, { status: 401 });
+  if (
+    !expectedUsername ||
+    !expectedPassword ||
+    !safeEqual(username, expectedUsername) ||
+    !safeEqual(password, expectedPassword)
+  ) {
+    return NextResponse.json({ error: "Invalid username or password" }, { status: 401 });
   }
 
   const response = NextResponse.json({ ok: true });

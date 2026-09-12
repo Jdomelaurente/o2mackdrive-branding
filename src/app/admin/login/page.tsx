@@ -13,6 +13,7 @@ function nextPath(raw: string | null): string | null {
 export default function AdminLoginPage() {
   const router = useRouter();
 
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -25,7 +26,7 @@ export default function AdminLoginPage() {
       const res = await fetch("/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ username, password }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Login failed");
@@ -82,11 +83,25 @@ export default function AdminLoginPage() {
               ) : null}
 
               <label className="grid gap-2">
+                <Label>Username</Label>
+                <input
+                  type="text"
+                  required
+                  autoFocus
+                  autoComplete="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  disabled={busy}
+                  placeholder="Enter your username"
+                  className={inputClass}
+                />
+              </label>
+
+              <label className="grid gap-2">
                 <Label>Password</Label>
                 <input
                   type="password"
                   required
-                  autoFocus
                   autoComplete="current-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}

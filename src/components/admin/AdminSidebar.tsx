@@ -36,9 +36,9 @@ function NavLink({
   return (
     <Link
       href={href}
-      className={`px-4 py-2.5 text-[11px] font-black uppercase tracking-[0.22em] transition ${
+      className={`block px-4 py-2.5 text-[11px] font-black uppercase tracking-[0.22em] transition ${
         active
-          ? "bg-white text-black"
+          ? "bg-white !text-black"
           : "text-white/60 hover:bg-white/5 hover:text-white"
       }`}
     >
@@ -141,7 +141,7 @@ export function AdminSidebar() {
                 href={item.href}
                 className={`whitespace-nowrap px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.18em] transition ${
                   item.match(pathname)
-                    ? "bg-white text-black"
+                    ? "bg-white !text-black"
                     : "bg-white/10 text-white/70"
                 }`}
               >
