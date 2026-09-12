@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { faqs } from "@/data/faqs";
-import { site } from "@/data/site";
 import { financing } from "@/data/financing";
 
 export const metadata: Metadata = {
@@ -250,34 +249,7 @@ export default function FinancingPage() {
           </Reveal>
         </section>
 
-        <section className="grid gap-8 border-t border-black/10 py-8 text-xs text-black/45 sm:grid-cols-[1.2fr_1fr_1fr]">
-          <div>
-            <p className="text-sm font-black uppercase tracking-tight text-black">
-              O2MackDrive
-            </p>
-            <p className="mt-3 max-w-xs leading-5">{site.description}</p>
-          </div>
-          <div>
-            <p className="font-black uppercase tracking-[0.22em]">Discover</p>
-            <div className="mt-3 grid gap-2">
-              <Link href="/cars" className="hover:text-black">
-                Inventory
-              </Link>
-              <Link href="/sell-trade" className="hover:text-black">
-                Sell or Trade
-              </Link>
-              <Link href="/contact" className="hover:text-black">
-                Contact
-              </Link>
-            </div>
-          </div>
-          <div>
-            <p className="font-black uppercase tracking-[0.22em]">Contact</p>
-            <p className="mt-3 leading-5">{site.location}</p>
-            <p className="mt-2 leading-5">{site.phone}</p>
-          </div>
-        </section>
-      </Container>
+</Container>
     </main>
   );
 }

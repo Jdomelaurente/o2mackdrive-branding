@@ -5,6 +5,8 @@ import Link from "next/link";
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
   const inputClass =
     "w-full border border-slate-200 bg-slate-50 px-3 py-2.5 text-xs font-semibold text-slate-800 outline-none transition focus:border-slate-400 focus:bg-white placeholder:text-slate-400";
@@ -29,9 +31,30 @@ export function ContactForm() {
   return (
     <form
       className="border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
-      onSubmit={(event) => {
+      onSubmit={async (event) => {
         event.preventDefault();
-        setSubmitted(true);
+        const formData = new FormData(event.currentTarget);
+        setSending(true);
+        setError("");
+        try {
+          const res = await fetch("/api/inquiries/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: formData.get("name"),
+              phone: formData.get("phone"),
+              email: formData.get("email"),
+              message: formData.get("message"),
+            }),
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error ?? "Submission failed");
+          setSubmitted(true);
+        } catch {
+          setError("Could not send your inquiry. Please try again or contact us directly.");
+        } finally {
+          setSending(false);
+        }
       }}
     >
       <div className="border-b border-slate-200 pb-4 mb-5">
@@ -40,6 +63,12 @@ export function ContactForm() {
           Share your details and the team will continue the conversation directly.
         </p>
       </div>
+
+      {error ? (
+        <div className="mb-4 border border-red-200 bg-red-50 px-4 py-3">
+          <p className="text-xs font-bold text-red-700">{error}</p>
+        </div>
+      ) : null}
 
       <div className="grid gap-4">
         <label className="grid gap-2">
@@ -77,9 +106,10 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="mt-4 w-full bg-black text-white hover:bg-slate-900 uppercase font-black py-3 text-xs tracking-widest transition cursor-pointer"
+        disabled={sending}
+        className="mt-4 w-full bg-black text-white hover:bg-slate-900 uppercase font-black py-3 text-xs tracking-widest transition cursor-pointer disabled:opacity-50"
       >
-        Send Inquiry
+        {sending ? "Sending…" : "Send Inquiry"}
       </button>
     </form>
   );

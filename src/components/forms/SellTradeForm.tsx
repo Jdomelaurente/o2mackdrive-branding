@@ -6,6 +6,8 @@ import Link from "next/link";
 export function SellTradeForm() {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
   // Form input states
   const [year, setYear] = useState("");
@@ -31,10 +33,34 @@ export function SellTradeForm() {
     setStep(step - 1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !phone) return;
-    setSubmitted(true);
+    setSending(true);
+    setError("");
+    try {
+      const res = await fetch("/api/inquiries/sell-trade", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          year,
+          make,
+          model,
+          mileage,
+          price,
+          notes,
+          name,
+          phone,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Submission failed");
+      setSubmitted(true);
+    } catch {
+      setError("Could not submit your inquiry. Please try again or contact us directly.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const inputClass =
@@ -230,11 +256,18 @@ export function SellTradeForm() {
             </button>
             <button
               type="submit"
-              className="bg-black text-white hover:bg-slate-900 uppercase font-black py-3 px-6 text-[10px] tracking-widest transition cursor-pointer"
+              disabled={sending}
+              className="bg-black text-white hover:bg-slate-900 uppercase font-black py-3 px-6 text-[10px] tracking-widest transition cursor-pointer disabled:opacity-50"
             >
-              Submit Inquiry
+              {sending ? "Submitting…" : "Submit Inquiry"}
             </button>
           </div>
+
+          {error ? (
+            <div className="border border-red-200 bg-red-50 px-4 py-3">
+              <p className="text-xs font-bold text-red-700">{error}</p>
+            </div>
+          ) : null}
         </div>
       )}
     </form>

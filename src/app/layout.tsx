@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
-import { Footer } from "@/components/layout/Footer";
-import { Navbar } from "@/components/layout/Navbar";
-import { CookieConsent } from "@/components/layout/CookieConsent";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -57,17 +55,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} antialiased`}>
-      <body>
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-black focus:px-4 focus:py-2 focus:text-sm focus:text-white"
-        >
-          Skip to content
-        </a>
-        <Navbar />
-        <main id="main-content" className="pt-20 md:pt-28">{children}</main>
-        <Footer />
-        <CookieConsent />
+      <body className="antialiased">
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );
