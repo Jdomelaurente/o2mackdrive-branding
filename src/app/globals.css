@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+html:has(#not-found-page) header,
+html:has(#not-found-page) footer {
+  display: none;
+}
+
+html:has(#not-found-page) #main-content {
+  padding-top: 0;
+}
+
 :root {
   --background: #020617;
   --foreground: #f8fafc;

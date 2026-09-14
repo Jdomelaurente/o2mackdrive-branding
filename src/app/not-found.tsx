@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/Container";
 
 export default function NotFound() {
   return (
-    <section className="flex min-h-[60vh] items-center justify-center bg-white py-16 sm:py-24">
+    <section id="not-found-page" className="flex min-h-screen items-center justify-center bg-white py-16 sm:py-24">
       <Container className="text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-orange-600">404</p>
         <h1 className="mt-4 text-3xl font-black text-black sm:text-4xl">Page not found</h1>
