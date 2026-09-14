@@ -115,7 +115,7 @@ function Hero() {
   })();
 
   return (
-    <section className="relative -mt-20 min-h-[80svh] overflow-hidden bg-[#111] md:-mt-28">
+    <section className="relative -mt-20 min-h-[85svh] overflow-hidden bg-[#111] md:-mt-28">
       {/* Background image — architectural showroom */}
       <Image
         src="/screen-4.png"
@@ -133,7 +133,7 @@ function Hero() {
       <div className="absolute inset-x-0 top-0 z-[2] h-28 bg-gradient-to-b from-black/50 to-transparent" />
 
       {/* Content layer */}
-      <Container className="relative z-10 flex min-h-[80svh] flex-col justify-between px-6 pb-2 pt-10 sm:pt-12 md:pt-14">
+      <Container className="relative z-10 flex min-h-[85svh] flex-col justify-between px-6 pb-2 pt-10 sm:pt-12 md:pt-14">
         {/* ── Top: centered headline ── */}
         <div className="shrink-0 text-center animate-fade-in-up">
           <h1 className="mx-auto mt-6 max-w-2xl text-[clamp(1.6rem,4.5vw,2.8rem)] text-black font-black italic leading-[0.95] tracking-[-0.06em] font-display [text-shadow:0_2px_8px_rgba(255,255,255,0.6)]">
